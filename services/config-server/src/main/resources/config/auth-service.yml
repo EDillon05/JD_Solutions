@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/users_db
+    url: jdbc:postgresql://localhost:5432/user_db
     username: root
     password: root
     driver-class-name: org.postgresql.Driver
@@ -11,7 +11,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   flyway:
     baseline-on-migrate: true
-    enabled: false
+    enabled: true
     baseline-description: "Migration baseline"
     baseline-version: 0
     user: ${spring.datasource.username}

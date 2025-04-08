@@ -13,9 +13,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class User {
+public class Users {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String Name;
     private String LastName1;
@@ -31,7 +31,7 @@ public class User {
      @JoinTable(
         name = "user_roles",
         joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "rol_id")
+        inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Roles> roles = new HashSet<>();
 

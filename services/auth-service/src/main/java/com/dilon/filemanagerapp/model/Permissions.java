@@ -1,9 +1,6 @@
 package com.dilon.filemanagerapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
@@ -17,7 +14,7 @@ import java.util.Set;
 @Entity
 public class Permissions {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String description;
