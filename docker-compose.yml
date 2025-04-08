@@ -1,0 +1,22 @@
+services:
+  user-db:
+    image: postgres
+    container_name: user_postgres_db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: user_db
+    volumes:
+      - user_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - microservices-net
+
+
+volumes:
+  user_data:
+
+networks:
+  microservices-net:
+    driver: bridge
