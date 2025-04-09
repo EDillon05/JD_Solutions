@@ -17,17 +17,17 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String Name;
-    private String LastName1;
-    private String LastName2;
-    private String Email;
-    private String Password;
-    private String Phone;
+    private String name;
+    private String lastName1;
+    private String lastName2;
+    private String email;
+    private String password;
+    private String phone;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
      @JoinTable(
         name = "user_roles",
         joinColumns = @JoinColumn(name = "user_id"),
