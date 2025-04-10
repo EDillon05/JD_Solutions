@@ -1,6 +1,7 @@
 package com.dilon.filemanagerapp.service;
 
 import com.dilon.filemanagerapp.dto.RegisterRequest;
+import com.dilon.filemanagerapp.dto.UserResponse;
 import com.dilon.filemanagerapp.model.Users;
 import org.springframework.stereotype.Component;
 
@@ -20,5 +21,22 @@ public class UserMapper {
                 .createdAt(request.createdAt())
                 .roles(request.roles())
                 .build();
+    }
+
+    public UserResponse fromUser(Users users) {
+        if (users == null) {
+            return null;
+        }
+        return new UserResponse(
+                users.getId(),
+                users.getName(),
+                users.getLastName1(),
+                users.getLastName2(),
+                users.getEmail(),
+                users.getPhone(),
+                users.getCreatedAt().toString(),
+                users.getRoles().toString()
+        );
+
     }
 }
