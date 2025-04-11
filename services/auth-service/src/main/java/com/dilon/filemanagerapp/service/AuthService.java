@@ -43,5 +43,11 @@ public class AuthService {
                 .map(this.mapper::fromUser)
                 .collect(Collectors.toList());
     }
+
+    public UserResponse findById(Integer id) {
+        return repository.findById(id)
+                .map(this.mapper::fromUser)
+                .orElseThrow(() -> new RuntimeException("User not found: " + id));
+    }
 }
 

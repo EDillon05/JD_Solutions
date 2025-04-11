@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
@@ -27,6 +28,11 @@ public class AuthController {
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAll() {
     return ResponseEntity.ok(this.service.findAllCustomers());
+    }
+
+    @GetMapping("/{user-id}")
+    public ResponseEntity<UserResponse> findById(@PathVariable ("user-id")Integer userId) {
+        return ResponseEntity.ok(service.findById(userId));
     }
 
 }
