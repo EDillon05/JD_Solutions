@@ -21,12 +21,12 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS user_roles (
-    user_id INTEGER NOT NULL,
-    role_id INTEGER NOT NULL,
-    PRIMARY KEY (user_id, role_id),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
+CREATE TABLE IF NOT EXISTS users_roles (
+    users_id INTEGER NOT NULL,
+    roles_id INTEGER NOT NULL,
+    PRIMARY KEY (users_id, roles_id),
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (roles_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
 CREATE TABLE roles_permissions (

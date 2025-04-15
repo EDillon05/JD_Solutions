@@ -1,4 +1,19 @@
 spring:
+  mail:
+    host: localhost
+    port: 1025
+    username: root
+    password: root
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enable: true
+        connectiontimeout: 5000
+        timeout: 3000
+        write-timeout: 5000
   datasource:
     url: jdbc:postgresql://localhost:5432/user_db
     username: root
@@ -18,3 +33,14 @@ spring:
     password: ${spring.datasource.password}
 server:
   port: 8050
+  servlet:
+    context-path: /api/v1/
+
+application:
+  security:
+    jwt:
+      secret-key: 88888888
+      expiration: 86400
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-account

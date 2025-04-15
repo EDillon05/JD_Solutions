@@ -2,15 +2,18 @@ package com.dilon.filemanagerapp.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor
@@ -18,27 +21,39 @@ import java.util.Set;
 @Builder
 @Getter
 @Setter
-public class Users implements UserDetails, Principal {
+@Table(name = "users")
+@EntityListeners(AuditingEntityListener.class)
+public class User implements UserDetails, Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String lastName1;
     private String lastName2;
+    @Column(unique = true)
     private String email;
     private String password;
     private String phone;
+    private boolean accountLocked;
+    private boolean enabled;
 
-    @Column(name = "created_at", updatable = false)
+    @CreatedDate
+    @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-        name = "user_roles",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Roles> roles = new HashSet<>();
+    @LastModifiedDate
+    @Column(name = "last_modified_at", insertable = false)
+    private LocalDateTime lastModifiedAt;
+
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    @JoinTable(
+//        name = "user_roles",
+//        joinColumns = @JoinColumn(name = "user_id"),
+//        inverseJoinColumns = @JoinColumn(name = "role_id")
+//    )
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Roles> roles;
 
     @PrePersist
     protected void onCreate() {
@@ -54,7 +69,15 @@ public class Users implements UserDetails, Principal {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return this.roles
+                .stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -69,7 +92,7 @@ public class Users implements UserDetails, Principal {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !accountLocked;
     }
 
     @Override
@@ -79,11 +102,16 @@ public class Users implements UserDetails, Principal {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
     @Override
     public String getName() {
-        return name;
+        return email;
     }
+
+    public String fullName(){
+        return name + lastName1 + lastName2;
+    }
+
 }

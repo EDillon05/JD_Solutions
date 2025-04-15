@@ -31,14 +31,8 @@ public record RegisterRequest(
         @Pattern(regexp = ".*[0-9].*", message = "password must contain at least one number")
         String password,
 
-        @Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$", message = "phone number must be valid")
-        String phone,
-
-        @NotNull(message = "Creation time is required")
-        LocalDateTime createdAt,
-
-        @NotNull(message = "At least one role is required")
-        Set<Roles> roles
+        //@Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$", message = "phone number must be valid")
+        String phone
 ) {
 }
 

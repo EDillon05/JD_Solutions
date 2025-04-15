@@ -13,6 +13,12 @@ services:
     networks:
       - microservices-net
 
+  mail-dev:
+    container_name: mail-dev-backend
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
 
 volumes:
   user_data:

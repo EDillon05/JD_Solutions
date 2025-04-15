@@ -8,7 +8,10 @@ public record UserResponse(
     String email,
     String phone,
     String createdAt,
-    String roles
+    String lastModifiedAt,
+    String roles,
+    Boolean accountLocked,
+    Boolean enabled
 ) {
 }
 
