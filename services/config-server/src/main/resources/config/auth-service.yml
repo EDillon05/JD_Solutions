@@ -39,7 +39,7 @@ server:
 application:
   security:
     jwt:
-      secret-key: 88888888
+      secret-key: 345C2881ED6659D8ABD15F23D264DC4FASD3MDCDKDKV3F3059FMVMVI485VMSJ39S
       expiration: 86400
   mailing:
     frontend:

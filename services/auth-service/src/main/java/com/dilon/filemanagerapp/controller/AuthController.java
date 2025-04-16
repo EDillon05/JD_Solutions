@@ -1,8 +1,11 @@
 package com.dilon.filemanagerapp.controller;
 
+import com.dilon.filemanagerapp.dto.AuthenticationRequest;
+import com.dilon.filemanagerapp.dto.AuthenticationResponse;
 import com.dilon.filemanagerapp.dto.RegisterRequest;
 import com.dilon.filemanagerapp.dto.UserResponse;
 import com.dilon.filemanagerapp.service.AuthService;
+import com.stoyanr.evictor.queue.PriorityEvictionQueue;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
@@ -32,6 +35,20 @@ public class AuthController {
     }
 
 
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(
+            @RequestBody @Valid AuthenticationRequest request
+    ){
+        System.out.println("Se alcanzo el endpoint de autenticacion");
+        return ResponseEntity.ok(service.authenticate(request));
+    }
+
+    @GetMapping("/activate-account")
+    public void confirm(
+            @RequestParam String token
+    ) throws MessagingException {
+        service.activateAccount(token);
+    }
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAll() {
