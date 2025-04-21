@@ -76,7 +76,7 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(BAD_REQUEST).body(
                 ExceptionResponse.builder()
-                        .validateErrors(errors)
+                        .validationErrors(errors)
                         .build()
         );
     }

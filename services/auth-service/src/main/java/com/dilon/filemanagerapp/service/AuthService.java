@@ -13,7 +13,6 @@ import com.dilon.filemanagerapp.repository.UserRepository;
 import com.dilon.filemanagerapp.security.JwtService;
 import com.dilon.filemanagerapp.security.Token;
 import jakarta.mail.MessagingException;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +20,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
@@ -61,31 +59,6 @@ public class AuthService {
         userRepository.save(user);
 
         sendValidationEmail(user);
-
-//        var user = User.builder()
-//                .name(request.name())
-//                .lastName1(request.lastName1())
-//                .lastName2(request.lastName2())
-//                .email(request.email())
-//                .password(passwordEncoder.encode(request.password()))
-//                .accountLocked(false)
-//                .enabled(false)
-//                .roles(Set.of(userRole))
-//                .build()
-//                ;
-//
-//        userRepository.save(user);
-
-//        // 👇 Cargar los roles por ID para que no estén detached
-//        Set<Roles> managedRoles = request.roles().stream()
-//                .map(role -> roleRepository.findById(role.getId())
-//                        .orElseThrow(() -> new RuntimeException("Role not found: " + role.getId())))
-//                .collect(Collectors.toSet());
-//
-//        user.setRoles(managedRoles);
-//
-//        var saved = repository.save(user);
-//        return saved.getId();
     }
 
     private void sendValidationEmail(User user) throws MessagingException {

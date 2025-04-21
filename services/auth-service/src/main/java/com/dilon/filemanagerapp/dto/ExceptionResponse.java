@@ -12,7 +12,7 @@ public record ExceptionResponse(
         Integer businessErrorCode,
         String businessExceptionDescription,
         String error,
-        Set<String> validateErrors,
+        Set<String> validationErrors,
         Map<String, String> errors
 
 ) {

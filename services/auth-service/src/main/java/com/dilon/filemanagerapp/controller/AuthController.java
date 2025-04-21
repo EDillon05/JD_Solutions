@@ -5,7 +5,6 @@ import com.dilon.filemanagerapp.dto.AuthenticationResponse;
 import com.dilon.filemanagerapp.dto.RegisterRequest;
 import com.dilon.filemanagerapp.dto.UserResponse;
 import com.dilon.filemanagerapp.service.AuthService;
-import com.stoyanr.evictor.queue.PriorityEvictionQueue;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("auth")
 @RequiredArgsConstructor
 public class AuthController {
@@ -36,14 +34,15 @@ public class AuthController {
 
 
     @PostMapping("/authenticate")
+    @Tag(name = "Authentication")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody @Valid AuthenticationRequest request
     ){
-        System.out.println("Se alcanzo el endpoint de autenticacion");
         return ResponseEntity.ok(service.authenticate(request));
     }
 
     @GetMapping("/activate-account")
+    @Tag(name = "Authentication")
     public void confirm(
             @RequestParam String token
     ) throws MessagingException {
@@ -51,11 +50,13 @@ public class AuthController {
     }
 
     @GetMapping
+    @Tag(name = "Authentication")
     public ResponseEntity<List<UserResponse>> findAll() {
     return ResponseEntity.ok(this.service.findAllCustomers());
     }
 
     @GetMapping("/{user-id}")
+    @Tag(name = "Authentication")
     public ResponseEntity<UserResponse> findById(@PathVariable ("user-id")Integer userId) {
         return ResponseEntity.ok(service.findById(userId));
     }
