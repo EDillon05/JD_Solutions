@@ -18,7 +18,7 @@ import {NgIf} from "@angular/common";
 export class ActivateAccountComponent {
 
   message = '';
-  isSucces = true;
+  isSuccess = true;
   submitted = false;
 
   constructor(
@@ -43,12 +43,12 @@ export class ActivateAccountComponent {
       next: () => {
         this.message = 'Account activated successfully.\n You can now login.';
         this.submitted = true;
-        this.isSucces = true;
+        this.isSuccess = true;
       },
       error: () => {
         this.message = 'Account activation failed.\n Please try again.';
         this.submitted = true;
-        this.isSucces = false;
+        this.isSuccess = false;
       }
     });
   }
