@@ -1,0 +1,136 @@
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
+@media (max-width: 600px) {
+  .login-container {
+    width: 300px;
+    margin-top: 20vh;
+    padding: 5px;
+    background-color: white;
+    border-radius: 13px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+  }
+
+  .form-container {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .login-container .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .buttons-container {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* TABLETS */
+@media (min-width: 601px) and (max-width: 900px) {
+  .login-container {
+    width: 500px;
+    margin-top: 20vh;
+    padding: 5px;
+    background-color: white;
+    border-radius: 13px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+  }
+
+  .login-container .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+    .buttons-container {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 901px) {
+  .login-container {
+    display: flex;
+    flex-direction: row;
+    width: 70vw;
+    margin-top: 20vh;
+    padding: 30px;
+    background-color: white;
+    border-radius: 13px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .alert {
+
+  }
+
+  .login-container .form-container {
+    padding: 20px;
+    border-right: solid 1px #ccc;
+    flex: 1;
+  }
+
+  .login-container .buttons-container {
+    padding: 40px 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    width: 40%;
+  }
+
+  .login-container .buttons-container p {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .login-container .buttons-container .btn-link {
+    padding: 0;
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  .login-container .buttons-container .btn-link:hover {
+    text-decoration: underline;
+  }
+
+  .login-container .btn-primary {
+    width: 100%;
+    background-color: #0066ff;
+    border: none;
+  }
+
+  .login-container .btn-primary:hover {
+    background-color: #004dcc;
+  }
+}
+
+/* DESKTOP MÁS GRANDE */
+@media (min-width: 1200px) {
+  .login-container {
+    width: 850px;
+  }
+}

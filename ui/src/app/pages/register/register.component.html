@@ -1,0 +1,42 @@
+<div class="container-fluid card login-container">
+  <div class="d-flex flex-column align-items-center mb-3 mt-3 logo-container">
+    <em class="fa-solid fa-circle-user fa-flip-horizontal fa-4x"></em>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length > 0">
+    <p *ngFor="let msg of errorMsg">{{ msg }}</p>
+  </div>
+  <div class="container-fluid form-container">
+    <h3 class="text-center">Create an account</h3>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name(s)</label>
+    <input [(ngModel)]="registerRequest.name" type="text" class="form-control border-dark" id="name" placeholder="Someone's Name">
+  </div>
+  <div class="mb-3">
+    <label for="lastName1" class="form-label">First Last Name</label>
+    <input [(ngModel)]="registerRequest.lastName1" type="email" class="form-control border-dark" id="lastName1" placeholder="First Last Name ">
+  </div>
+  <div class="mb-3">
+    <label for="lastName2" class="form-label">Second Lastname</label>
+    <input [(ngModel)]="registerRequest.lastName2" type="email" class="form-control border-dark" id="lastName2" placeholder="Second Last Name">
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input [(ngModel)]="registerRequest.email" type="email" class="form-control border-dark" id="email" placeholder="name@example.com">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input [(ngModel)]="registerRequest.password" type="password" class="form-control border-dark" id="password" placeholder="password">
+  </div>
+  </div>
+  <div class="d-inline-block align-content-center mb-3 buttons-container">
+    <button (click)="registerAccount()" type="button" class="btn btn-primary btn-lg ">
+      <em class="fas fa-door-open">&nbsp;Register</em>
+    </button>
+    <div>
+      <p class="text-black">Already Have an Account?&nbsp;</p>
+      <button (click)="login()" type="button" class="btn btn-link">
+        Login
+      </button>
+    </div>
+  </div>
+</div>
