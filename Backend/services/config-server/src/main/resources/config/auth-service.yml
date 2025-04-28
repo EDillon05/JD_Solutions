@@ -1,0 +1,47 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: cesar.dillon592@gmail.com
+    password: qetxypvvfvlmbtrp
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          write-timeout: 5000
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user_db
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    baseline-description: "Migration baseline"
+    baseline-version: 0
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+server:
+  port: 8050
+  servlet:
+    context-path: /api/v1/
+springdoc:
+  default-produces-media-type: application/json
+application:
+  security:
+    jwt:
+      secret-key: 345C2881ED6659D8ABD15F23D264DC4FASD3MDCDKDKV3F3059FMVMVI485VMSJ39S
+      expiration: 86400
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-account

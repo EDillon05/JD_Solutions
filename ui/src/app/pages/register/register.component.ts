@@ -19,7 +19,7 @@ import {RegisterRequest} from "../../services/models/register-request";
 })
 export class RegisterComponent {
 
-  registerRequest: RegisterRequest = {email: "", name: "", lastName1: "", lastName2: "", password: "", phone: "",};
+  registerRequest: RegisterRequest = {email: "", name: "", lastName1: "", lastName2: "", password: ""};
   errorMsg: Array<string> = [];
 
   constructor(

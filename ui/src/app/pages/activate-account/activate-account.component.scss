@@ -3,7 +3,9 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-  height: 100vh;
+  height: auto;
+  width: 400px;
+  margin-top: 200px;
 }
 
 .active-message, .activate-error {
@@ -13,3 +15,4 @@
 .activate-error {
   color: red;
 }
+

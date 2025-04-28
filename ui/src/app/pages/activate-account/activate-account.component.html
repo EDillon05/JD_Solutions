@@ -14,12 +14,11 @@
 </div>
 
 <ng-template #codeForm>
-  <div class="container">
-    <div class="text-center" style="width: 400px;">
+  <div class="container bg-primary rounded-3 p-3 text-dark">
+    <div class="text-center" style="width: 350px;">
       <h2>Type your activation code</h2>
       <code-input [isCodeHidden]="false"
-                  [codeLength]="6"
-                  [code]="'string'"
+                  [codeLength]="6" [code]="'string'"
                   (codeCompleted)="onCodeCompleted($event)"
       ></code-input>
     </div>
