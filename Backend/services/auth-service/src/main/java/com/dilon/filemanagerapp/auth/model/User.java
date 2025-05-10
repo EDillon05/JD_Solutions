@@ -1,7 +1,9 @@
 package com.dilon.filemanagerapp.auth.model;
 
+import com.dilon.filemanagerapp.profile.model.Profile;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,11 +20,12 @@ import java.util.stream.Collectors;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Getter
 @Setter
-@Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails, Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +61,9 @@ public class User implements UserDetails, Principal {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL )
+    private Profile profile;
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
