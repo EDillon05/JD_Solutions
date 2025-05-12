@@ -1,18 +1,87 @@
-.container {
+.activate-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.activate-left {
+  flex: 1;
+  background: linear-gradient(135deg, #fc5c7d, #6a82fb);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
-  height: auto;
-  width: 400px;
-  margin-top: 200px;
+  flex-direction: column;
+  padding: 2rem;
+  color: white;
+
+  .logo {
+    width: 120px;
+    margin-bottom: 1rem;
+  }
+
+  .illustration {
+    width: 240px;
+    height: 240px;
+    background-image: url('/assets/pencil-abstract.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top: 1rem;
+  }
 }
 
-.active-message, .activate-error {
+.activate-right {
+  flex: 1;
+  padding: 4rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-}
 
-.activate-error {
-  color: red;
-}
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
 
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #555;
+  }
+
+  .message-box {
+    font-size: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 400px;
+
+    &.success {
+      background-color: #e0f7e9;
+      color: #2e7d32;
+      border: 1px solid #2e7d32;
+    }
+
+    &.error {
+      background-color: #ffebee;
+      color: #c62828;
+      border: 1px solid #c62828;
+    }
+  }
+
+  .redirect-button {
+    margin-top: 1rem;
+    background-color: #6a82fb;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.6rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #594acf;
+    }
+  }
+}

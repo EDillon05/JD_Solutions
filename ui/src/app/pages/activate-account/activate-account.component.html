@@ -1,26 +1,24 @@
-<div class="container" *ngIf="submitted else codeForm">
-  <div class="activate-message alert alert-success" *ngIf="isSuccess else activationError">
-    <h2>Activation successful</h2>
-    <p>Your account has been successfully activated</p>
-    <button class="btn btn-primary" (click)="redirectToLogin()">Go to Login</button>
-  </div>
-  <ng-template #activationError>
-    <div class="activate-error alert alert-danger" role="alert">
-      <h2>Activation failed!</h2>
-      <p>{{message}}</p>
-      <button class="btn btn-primary" (click)="submitted = false">Try Again</button>
+<div class="activate-container">
+  <div class="activate-left">
+    <div class="logo-box">
+      <img src="assets/logo-jcstudio.svg" alt="JC Studio Logo" class="logo" />
+      <div class="illustration"></div>
     </div>
-  </ng-template>
-</div>
+  </div>
 
-<ng-template #codeForm>
-  <div class="container bg-primary rounded-3 p-3 text-dark">
-    <div class="text-center" style="width: 350px;">
-      <h2>Type your activation code</h2>
-      <code-input [isCodeHidden]="false"
-                  [codeLength]="6" [code]="'string'"
-                  (codeCompleted)="onCodeCompleted($event)"
-      ></code-input>
+  <div class="activate-right">
+    <h2>Activar cuenta</h2>
+    <p>Introduce el código que hemos enviado a tu correo electrónico.</p>
+
+    <code-input
+      *ngIf="!submitted"
+      [length]="6"
+      (codeCompleted)="onCodeCompleted($event)">
+    </code-input>
+
+    <div *ngIf="submitted" [ngClass]="{ 'success': isSuccess, 'error': !isSuccess }" class="message-box">
+      {{ message }}
+      <button class="redirect-button" (click)="redirectToLogin()">Ir al login</button>
     </div>
   </div>
-</ng-template>
+</div>

@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
-import {Router} from "@angular/router";
-import {CodeInputModule} from "angular-code-input";
-import {AuthenticationService} from "../../services/services/authentication.service";
-import {NgIf} from "@angular/common";
-
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/services/authentication.service';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { CodeInputModule } from 'angular-code-input';
 
 @Component({
   selector: 'app-activate-account',
   standalone: true,
   imports: [
     CodeInputModule,
-    NgIf
+    NgIf,
+    ReactiveFormsModule
   ],
   templateUrl: './activate-account.component.html',
-  styleUrl: './activate-account.component.scss'
+  styleUrls: ['./activate-account.component.scss']
 })
 export class ActivateAccountComponent {
-
   message = '';
   isSuccess = true;
   submitted = false;
@@ -24,29 +24,25 @@ export class ActivateAccountComponent {
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-  ) {
-  }
+  ) {}
 
   onCodeCompleted(token: string) {
     this.confirmAccount(token);
-
   }
 
   redirectToLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   private confirmAccount(token: string) {
-    this.authService.confirm({
-      token
-    }).subscribe({
+    this.authService.confirm({ token }).subscribe({
       next: () => {
-        this.message = 'Account activated successfully.\n You can now login.';
+        this.message = '¡Cuenta activada exitosamente! Ya puedes iniciar sesión.';
         this.submitted = true;
         this.isSuccess = true;
       },
       error: () => {
-        this.message = 'Account activation failed.\n Please try again.';
+        this.message = 'La activación falló. Por favor verifica el código e inténtalo nuevamente.';
         this.submitted = true;
         this.isSuccess = false;
       }

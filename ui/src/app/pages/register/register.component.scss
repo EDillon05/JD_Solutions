@@ -1,136 +1,121 @@
-.logo-container {
+.register-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.register-left {
+  flex: 1;
+  background: linear-gradient(135deg, #fc5c7d, #6a82fb);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
-}
+  flex-direction: column;
+  padding: 2rem;
+  color: white;
 
-
-@media (max-width: 600px) {
-  .login-container {
-    width: 300px;
-    margin-top: 20vh;
-    padding: 5px;
-    background-color: white;
-    border-radius: 13px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    flex-direction: column;
+  .logo {
+    width: 120px;
+    margin-bottom: 1rem;
   }
 
-  .form-container {
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .login-container .btn {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .buttons-container {
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-}
-
-/* TABLETS */
-@media (min-width: 601px) and (max-width: 900px) {
-  .login-container {
-    width: 500px;
-    margin-top: 20vh;
-    padding: 5px;
-    background-color: white;
-    border-radius: 13px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    flex-direction: column;
-  }
-
-  .login-container .btn {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-    .buttons-container {
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-}
-
-/* DESKTOP */
-@media (min-width: 901px) {
-  .login-container {
-    display: flex;
-    flex-direction: row;
-    width: 70vw;
-    margin-top: 20vh;
-    padding: 30px;
-    background-color: white;
-    border-radius: 13px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .alert {
-
-  }
-
-  .login-container .form-container {
-    padding: 20px;
-    border-right: solid 1px #ccc;
-    flex: 1;
-  }
-
-  .login-container .buttons-container {
-    padding: 40px 20px;
-    margin-left: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-    width: 40%;
-  }
-
-  .login-container .buttons-container p {
+  .illustration {
+    width: 240px;
+    height: 240px;
+    background-image: url('/assets/pencil-abstract.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
     margin-top: 1rem;
-    font-size: 1rem;
-  }
-
-  .login-container .buttons-container .btn-link {
-    padding: 0;
-    font-weight: bold;
-    color: #007bff;
-  }
-
-  .login-container .buttons-container .btn-link:hover {
-    text-decoration: underline;
-  }
-
-  .login-container .btn-primary {
-    width: 100%;
-    background-color: #0066ff;
-    border: none;
-  }
-
-  .login-container .btn-primary:hover {
-    background-color: #004dcc;
   }
 }
 
-/* DESKTOP MÁS GRANDE */
-@media (min-width: 1200px) {
-  .login-container {
-    width: 850px;
+.register-right {
+  flex: 1;
+  padding: 4rem;
+  background-color: white;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .input-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+  }
+
+  .register-button {
+    width: 100%;
+    background-color: #6a82fb;
+    color: white;
+    padding: 0.9rem;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #594acf;
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  .loader {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ffffff;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .error-msg {
+    font-size: 0.85rem;
+    color: #e53935;
+    margin-top: 0.25rem;
+  }
+
+  .error-global {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: #d32f2f;
+  }
+
+  .login-link {
+    margin-top: 2rem;
+    text-align: center;
+
+    a {
+      color: #6a82fb;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }

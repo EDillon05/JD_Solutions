@@ -1,30 +1,41 @@
-<div class="container-fluid card login-container">
-  <div class="d-flex flex-column align-items-center mb-3 mt-3 logo-container">
-    <em class="fa-solid fa-circle-user fa-flip-horizontal fa-4x"></em>
-  </div>
-  <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length > 0">
-    <p *ngFor="let msg of errorMsg">{{ msg }}</p>
-  </div>
-  <div class="container-fluid form-container">
-    <h3 class="text-center">Login</h3>
-  <div class="mb-3">
-    <label for="login" class="form-label">Email address</label>
-    <input [(ngModel)]="authRequest.email" type="email" class="form-control border-dark" id="login" placeholder="name@example.com">
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input [(ngModel)]="authRequest.password" type="password" class="form-control border-dark" id="password" placeholder="password">
-  </div>
-  </div>
-  <div class="d-inline-block align-content-center mb-3 buttons-container">
-    <button (click)="login()" type="button" class="btn btn-primary btn-lg ">
-      <em class="fas fa-sign-in-alt">&nbsp;Sign in</em>
-    </button>
-    <div>
-      <p class="text-black">Don't Have an Account?&nbsp;</p>
-      <button (click)="register()" type="button" class="btn btn-link">
-        Register
-      </button>
+<div class="login-container">
+  <div class="login-left">
+    <div class="logo-box">
+      <img src="assets/logo-jcstudio.svg" alt="JC Studio Logo" class="logo" />
+      <div class="illustration"></div>
     </div>
+  </div>
+
+  <div class="login-right">
+    <h2>Iniciar sesión</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="input-group">
+        <label>Correo electrónico</label>
+        <input type="email" formControlName="email" placeholder="Correo electrónico" />
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="error-msg">
+          <span *ngIf="loginForm.get('email')?.errors?.['required']">Este campo es obligatorio</span>
+          <span *ngIf="loginForm.get('email')?.errors?.['email']">Correo inválido</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" placeholder="Contraseña" />
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error-msg">
+          <span *ngIf="loginForm.get('password')?.errors?.['required']">Este campo es obligatorio</span>
+        </div>
+      </div>
+
+      <div *ngIf="errorMsg" class="error-global">{{ errorMsg }}</div>
+
+      <button type="submit" class="login-button" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Entrar</span>
+        <span *ngIf="isLoading" class="loader"></span>
+      </button>
+
+      <p class="register-link">
+        ¿No tienes una cuenta? <a (click)="goToRegister()">Regístrate aquí</a>
+      </p>
+    </form>
   </div>
 </div>

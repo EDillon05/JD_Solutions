@@ -122,6 +122,11 @@ export class AuthenticationService extends BaseService {
     return findById(this.http, this.rootUrl, params, context);
   }
 
+  loginUser(credentials: { email: string; password: string }) {
+  return this.http.post<any>('http://localhost:8080/api/auth/login', credentials);
+  }
+
+
   /**
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `findById$Response()` instead.

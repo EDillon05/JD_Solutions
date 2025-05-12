@@ -1,56 +1,61 @@
 import { Component } from '@angular/core';
-import {AuthenticationRequest} from "../../services/models/authentication-request";
-import {FormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AuthenticationService} from "../../services/services/authentication.service";
-import {CommonModule} from "@angular/common";
-import {TokenService} from "../../services/token/token.service";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/services/authentication.service';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [
-    FormsModule,
-    CommonModule
-  ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
-  authRequest: AuthenticationRequest = {email: '', password: ''};
-  errorMsg: Array<string> = [];
+  loginForm: FormGroup;
+  errorMsg: string = '';
+  isLoading: boolean = false;
 
   constructor(
-    private router: Router,
     private authService: AuthenticationService,
-    private tokenSeervice: TokenService
+    private router: Router,
+    private fb: FormBuilder
   ) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
   }
 
-login() {
-  this.errorMsg = [];
-  this.authService.authenticate({
-    body: this.authRequest
-  }).subscribe({
-    next: (res) => {
-      this.tokenSeervice.token = res.token as string;
-      this.router.navigate(['dashboard']);
-    },
-    error: (err) => {
-      console.log('Error recibido del backend:', err);
-      if (err.error.validationErrors) {
-        this.errorMsg = err.error.validationErrors;
-      } else {
-        this.errorMsg.push(err.error.error);
-      }
+  login(): void {
+    this.errorMsg = '';
+    this.isLoading = true;
+
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      this.isLoading = false;
+      return;
     }
-  });
-}
 
+    const formValue = this.loginForm.value;
 
-  register() {
-    this.router.navigate(['register']);
+    this.authService.loginUser({
+      email: formValue.email,
+      password: formValue.password
+    }).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['/dashboard']); // ajusta la ruta según tu app
+      },
+      error: (err) => {
+        this.isLoading = false;
+        if (err.error?.message) {
+          this.errorMsg = err.error.message;
+        } else {
+          this.errorMsg = 'Ocurrió un error inesperado. Intenta de nuevo.';
+        }
+      }
+    });
+  }
+
+  goToRegister(): void {
+    this.router.navigate(['/auth/register']);
   }
 }
-

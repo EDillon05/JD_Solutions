@@ -1,52 +1,72 @@
-import {Component} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AuthenticationService} from "../../services/services/authentication.service";
-import {RegisterRequest} from "../../services/models/register-request";
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/services/authentication.service';
+import { RegisterRequest } from '../../services/models/register-request';
 
 @Component({
   selector: 'app-register',
-  standalone: true,
-  imports: [
-    NgForOf,
-    NgIf,
-    ReactiveFormsModule,
-    FormsModule
-  ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-
-  registerRequest: RegisterRequest = {email: "", name: "", lastName1: "", lastName2: "", password: ""};
-  errorMsg: Array<string> = [];
+  registerForm: FormGroup;
+  errorMsg: string = '';
+  isLoading: boolean = false;
 
   constructor(
     private authService: AuthenticationService,
     private router: Router,
+    private fb: FormBuilder
   ) {
-  }
-
-  registerAccount() {
-    this.errorMsg = [];
-    this.authService.registerUser({
-      body: this.registerRequest
-    }).subscribe({
-      next: () => {
-        this.router.navigate(['activate-account']);
-      },
-    error: (err) => {
-      if (err.error.validationErrors) {
-        this.errorMsg = err.error.validationErrors;
-      } else {
-        this.errorMsg.push(err.error.error);
-      }
-    }
+    this.registerForm = this.fb.group({
+      name: ['', Validators.required],
+      lastName1: ['', Validators.required],
+      lastName2: [''],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  login() {
-    this.router.navigate(['login']);
+  registerAccount(): void {
+    this.errorMsg = '';
+    this.isLoading = true;
+
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      this.isLoading = false;
+      return;
+    }
+
+    const formValue = this.registerForm.value;
+
+    const registerRequest: RegisterRequest = {
+      name: formValue.name,
+      lastName1: formValue.lastName1,
+      lastName2: formValue.lastName2,
+      email: formValue.email,
+      password: formValue.password,
+    };
+
+    this.authService.registerUser({ body: registerRequest }).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['activate-account']);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        if (err.error?.validationErrors) {
+          this.errorMsg = err.error.validationErrors.join(', ');
+        } else if (err.error?.error) {
+          this.errorMsg = err.error.error;
+        } else {
+          this.errorMsg = 'Ocurrió un error inesperado. Intenta de nuevo.';
+        }
+      }
+    });
+  }
+
+  login(): void {
+    this.router.navigate(['/auth/login']);
   }
 }
