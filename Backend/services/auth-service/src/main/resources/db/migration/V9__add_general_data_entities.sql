@@ -33,7 +33,6 @@ CREATE TABLE IF NOT EXISTS career (
     license_id VARCHAR(255) NOT NULL,
     modality VARCHAR(255) NOT NULL,
     graduation_date TIMESTAMP NOT NULL,
-    status VARCHAR(255) NOT NULL,
     CONSTRAINT fk_career_base_document FOREIGN KEY (id) REFERENCES base_document_entity(id) ON DELETE CASCADE
 );
 

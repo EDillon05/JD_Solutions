@@ -1,7 +1,6 @@
-package com.dilon.filemanagerapp.general.model;
+package com.dilon.filemanagerapp.general.info.experience.model;
 
-import com.dilon.filemanagerapp.common.BaseDocumentEntity;
-import com.dilon.filemanagerapp.profile.model.Profile;
+import com.dilon.filemanagerapp.common.model.BaseDocumentEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

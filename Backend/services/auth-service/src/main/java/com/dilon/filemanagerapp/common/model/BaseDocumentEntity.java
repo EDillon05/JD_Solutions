@@ -1,4 +1,4 @@
-package com.dilon.filemanagerapp.common;
+package com.dilon.filemanagerapp.common.model;
 
 
 import com.dilon.filemanagerapp.profile.model.Profile;
@@ -37,17 +37,7 @@ public class BaseDocumentEntity {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false, unique = true)
+    @JoinColumn(name = "owner_id", nullable = false)
     private Profile owner;
 
-//    @ManyToOne
-//    @JoinColumn(name = "owner_id")
-//    private Profile owner;
-//
-//    @OneToOne(mappedBy = "document")
-//    private Experience experiences;
-//    @OneToOne(mappedBy = "document")
-//    private Career careers;
-//    @OneToOne(mappedBy = "document")
-//    private Teaching teachings;
 }
