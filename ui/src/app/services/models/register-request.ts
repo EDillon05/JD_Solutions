@@ -8,5 +8,4 @@ export interface RegisterRequest {
   lastName2?: string;
   name: string;
   password: string;
-  phone?: string;
 }

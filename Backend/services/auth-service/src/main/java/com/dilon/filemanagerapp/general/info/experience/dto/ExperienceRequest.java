@@ -1,5 +1,6 @@
 package com.dilon.filemanagerapp.general.info.experience.dto;
 
+import com.dilon.filemanagerapp.common.repository.UpdateRequest;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,8 +14,6 @@ public record ExperienceRequest(
         @NotNull(message = "101")
         @NotEmpty(message = "101")
         String type,
-        @NotNull(message = "102")
-        @NotEmpty(message = "102")
         String description,
         @NotNull(message = "103")
         @NotEmpty(message = "103")
@@ -41,5 +40,10 @@ public record ExperienceRequest(
         @NotNull(message = "110")
         @NotEmpty(message = "110")
         String contractType
-        ) {
+        )
+implements UpdateRequest {
+    @Override
+    public Integer getId() {
+        return id;
+    }
 }

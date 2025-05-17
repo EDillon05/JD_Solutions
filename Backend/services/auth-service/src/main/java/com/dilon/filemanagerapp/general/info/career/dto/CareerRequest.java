@@ -1,5 +1,6 @@
 package com.dilon.filemanagerapp.general.info.career.dto;
 
+import com.dilon.filemanagerapp.common.repository.UpdateRequest;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,8 +14,6 @@ public record CareerRequest(
     @NotNull(message = "101")
     @NotEmpty(message = "101")
     String type,
-    @NotNull(message = "102")
-    @NotEmpty(message = "102")
     String description,
     @NotNull(message = "103")
     @NotEmpty(message = "103")
@@ -46,5 +45,9 @@ public record CareerRequest(
     String modality,
     @NotNull(message = "112")
     LocalDateTime graduation_date
-) {
+) implements UpdateRequest {
+    @Override
+    public Integer getId() {
+        return id;
+    }
 }

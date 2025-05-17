@@ -1,6 +1,7 @@
 package com.dilon.filemanagerapp.common.service;
 
 import com.dilon.filemanagerapp.common.model.BaseDocumentEntity;
+import com.dilon.filemanagerapp.general.info.career.model.Career;
 import com.dilon.filemanagerapp.profile.model.Profile;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -49,5 +50,14 @@ public class BaseSpecificationBuilder<T extends BaseDocumentEntity> {
         if (startedAt != null)
             return (root, query, cb) -> cb.greaterThanOrEqualTo(root.get("startedAt"), startedAt);
         return (root, query, cb) -> cb.lessThanOrEqualTo(root.get("startedAt"), finishedAt);
+    }
+
+        public static <T> Specification<T> withOwnerId(Integer ownerId) {
+        return (root, query, criteriaBuilder) -> {
+            if (ownerId == null) {
+                return criteriaBuilder.conjunction();
+            }
+            return criteriaBuilder.equal(root.get("owner").get("id"), ownerId);
+        };
     }
 }

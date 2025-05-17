@@ -12,6 +12,5 @@ export interface UserResponse {
   lastName1?: string;
   lastName2?: string;
   name?: string;
-  phone?: string;
   roles?: string;
 }

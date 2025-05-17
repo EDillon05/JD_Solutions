@@ -18,8 +18,8 @@ import { confirm } from '../fn/authentication/confirm';
 import { Confirm$Params } from '../fn/authentication/confirm';
 import { findAll } from '../fn/authentication/find-all';
 import { FindAll$Params } from '../fn/authentication/find-all';
-import { findById } from '../fn/authentication/find-by-id';
-import { FindById$Params } from '../fn/authentication/find-by-id';
+import { findById3 } from '../fn/authentication/find-by-id-3';
+import { FindById3$Params } from '../fn/authentication/find-by-id-3';
 import { registerUser } from '../fn/authentication/register-user';
 import { RegisterUser$Params } from '../fn/authentication/register-user';
 import { UserResponse } from '../models/user-response';
@@ -109,27 +109,27 @@ export class AuthenticationService extends BaseService {
     );
   }
 
-  /** Path part for operation `findById()` */
-  static readonly FindByIdPath = '/auth/{user-id}';
+  /** Path part for operation `findById3()` */
+  static readonly FindById3Path = '/auth/{user-id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById()` instead.
+   * To access only the response body, use `findById3()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById$Response(params: FindById$Params, context?: HttpContext): Observable<StrictHttpResponse<UserResponse>> {
-    return findById(this.http, this.rootUrl, params, context);
+  findById3$Response(params: FindById3$Params, context?: HttpContext): Observable<StrictHttpResponse<UserResponse>> {
+    return findById3(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById$Response()` instead.
+   * To access the full response (for headers, for example), `findById3$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById(params: FindById$Params, context?: HttpContext): Observable<UserResponse> {
-    return this.findById$Response(params, context).pipe(
+  findById3(params: FindById3$Params, context?: HttpContext): Observable<UserResponse> {
+    return this.findById3$Response(params, context).pipe(
       map((r: StrictHttpResponse<UserResponse>): UserResponse => r.body)
     );
   }

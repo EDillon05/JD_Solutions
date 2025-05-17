@@ -4,5 +4,14 @@
 
 export type { AuthenticationRequest } from './models/authentication-request';
 export type { AuthenticationResponse } from './models/authentication-response';
+export type { CareerRequest } from './models/career-request';
+export type { CareerResponse } from './models/career-response';
+export type { ExperienceRequest } from './models/experience-request';
+export type { ExperienceResponse } from './models/experience-response';
+export type { PageResponseCareerResponse } from './models/page-response-career-response';
+export type { PageResponseExperienceResponse } from './models/page-response-experience-response';
+export type { PageResponseTeachingResponse } from './models/page-response-teaching-response';
 export type { RegisterRequest } from './models/register-request';
+export type { TeachingRequest } from './models/teaching-request';
+export type { TeachingResponse } from './models/teaching-response';
 export type { UserResponse } from './models/user-response';
