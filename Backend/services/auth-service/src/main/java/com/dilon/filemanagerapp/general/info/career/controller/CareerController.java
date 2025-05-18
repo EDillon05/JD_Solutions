@@ -37,12 +37,12 @@ public class CareerController {
     }
 
     @GetMapping("/owner")
-    public ResponseEntity<PageResponse<CareerResponse>> findAllCareersByOwner(
+    public ResponseEntity<PageResponse<CareerResponse>> findAllByOwner(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             Authentication auth
     ) {
-        return ResponseEntity.ok(careerService.findAllCareersByOwner(page, size, auth));
+        return ResponseEntity.ok(careerService.findAllByOwner(page, size, auth));
     }
 
     @GetMapping("/search")
@@ -60,19 +60,20 @@ public class CareerController {
 
 
     @PutMapping()
-    public ResponseEntity<Integer> updateCareer(
+    public ResponseEntity<Void> update(
             @RequestBody @Valid CareerRequest request,
             Authentication auth
     ) {
-        this.careerService.updateCareer(request, auth);
+        this.careerService.update(request, auth);
         return ResponseEntity.accepted().build();
     }
 
     @DeleteMapping("/{career-id}")
-    public ResponseEntity<Void> deleteCareer(
-            @PathVariable("career-id") String careerId
+    public ResponseEntity<Void> deleteById(
+            @PathVariable("career-id") String careerId,
+            Authentication auth
     ) {
-        this.careerService.deleteCareer(careerId);
+        this.careerService.deleteById(Integer.valueOf(careerId), auth);
         return ResponseEntity.accepted().build();
     }
 

@@ -1,4 +1,4 @@
-package com.dilon.filemanagerapp.general.info.career.dto;
+package com.dilon.filemanagerapp.general.info.research.dto;
 
 import com.dilon.filemanagerapp.common.repository.UpdateRequest;
 import jakarta.validation.constraints.NotEmpty;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public record CareerRequest(
+public record ResearchRequest(
     Integer id,
     @NotNull(message = "100")
     @NotEmpty(message = "100")
@@ -30,21 +30,16 @@ public record CareerRequest(
 
     @NotNull(message = "107")
     @NotEmpty(message = "107")
-    String level,
+    String publicationType, //e.g. book, article, etc.
     @NotNull(message = "108")
     @NotEmpty(message = "108")
-    String institution,
-    @NotNull(message = "109")
-    @NotEmpty(message = "109")
-    String certification_name,
-    @NotNull(message = "110")
-    @NotEmpty(message = "110")
-    String licenseId,
-    @NotNull(message = "111")
-    @NotEmpty(message = "111")
-    String modality,
-    @NotNull(message = "112")
-    LocalDateTime graduation_date
+    String publicationTitle,
+    String magazineName, //if applicable
+    LocalDateTime publicationDate, //if applicable
+    String doi, //Digital Object Identifier
+    String isbn,
+    String eventName //if applicable
+
 ) implements UpdateRequest {
     @Override
     public Integer getId() {
