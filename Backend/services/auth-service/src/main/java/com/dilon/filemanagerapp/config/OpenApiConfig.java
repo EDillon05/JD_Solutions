@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
         servers = {
                 @Server(
                         description = "Local server",
-                        url = "http://localhost:8080"
+                        url = "http://localhost:8050"
                 ),
                 @Server(
                         description = "Research server",

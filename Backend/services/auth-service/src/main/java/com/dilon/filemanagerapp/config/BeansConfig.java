@@ -59,7 +59,7 @@ public class BeansConfig {
         config.setAllowedMethods(Arrays.asList(
                 "GET",
                 "POST",
-                "DELET",
+                "DELETE",
                 "PUT",
                 "PATCH"
         ));

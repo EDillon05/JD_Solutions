@@ -1,6 +1,6 @@
 package com.dilon.filemanagerapp.common.service;
 
-import com.dilon.filemanagerapp.auth.model.User;
+import com.dilon.filemanagerapp.auth.model.Users;
 import com.dilon.filemanagerapp.common.dto.PageResponse;
 import com.dilon.filemanagerapp.common.model.BaseDocumentEntity;
 import com.dilon.filemanagerapp.common.repository.UpdateRequest;
@@ -35,8 +35,8 @@ public abstract class BaseDocumentService<Entity extends BaseDocumentEntity, Req
 
 
     public Integer save(Req dtoReq, Authentication connectedUser) {
-        User user = (User) connectedUser.getPrincipal();
-        Profile profile = user.getProfile();
+        Users users = (Users) connectedUser.getPrincipal();
+        Profile profile = users.getProfile();
         if (profile == null) {
             throw new IllegalStateException("El usuario no tiene un perfil asociado.");
         }
@@ -47,8 +47,8 @@ public abstract class BaseDocumentService<Entity extends BaseDocumentEntity, Req
     }
 
     public Res findById(Integer documentId, Authentication connectedUser) {
-        User user = (User) connectedUser.getPrincipal();
-        Profile profile = user.getProfile();
+        Users users = (Users) connectedUser.getPrincipal();
+        Profile profile = users.getProfile();
 
         return getRepository().findById(documentId)
                 .filter(doc -> doc.getOwner().getId().equals(profile.getId()))
@@ -57,8 +57,8 @@ public abstract class BaseDocumentService<Entity extends BaseDocumentEntity, Req
     }
 
     public PageResponse<Res> findAllByOwner(int page, int size, Authentication auth) {
-        User user = (User) auth.getPrincipal();
-        Profile profile = user.getProfile();
+        Users users = (Users) auth.getPrincipal();
+        Profile profile = users.getProfile();
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
 
@@ -78,8 +78,8 @@ public abstract class BaseDocumentService<Entity extends BaseDocumentEntity, Req
     }
 
     public PageResponse<Res> searchByFilters(int page, int size, String keyword, String type, LocalDateTime startedAt, LocalDateTime finishedAt, Authentication auth) {
-        User user = (User) auth.getPrincipal();
-        Profile profile = user.getProfile();
+        Users users = (Users) auth.getPrincipal();
+        Profile profile = users.getProfile();
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
 
@@ -106,8 +106,8 @@ public abstract class BaseDocumentService<Entity extends BaseDocumentEntity, Req
     }
 
     public void deleteById (Integer documentId, Authentication connectedUser) {
-        User user = (User) connectedUser.getPrincipal();
-        Profile profile = user.getProfile();
+        Users users = (Users) connectedUser.getPrincipal();
+        Profile profile = users.getProfile();
 
         Entity entity = getRepository().findById(documentId)
                 .filter(doc -> doc.getOwner().getId().equals(profile.getId()))
@@ -117,8 +117,8 @@ public abstract class BaseDocumentService<Entity extends BaseDocumentEntity, Req
     }
 
 public void update(@Valid Req request, Authentication auth) {
-    User user = (User) auth.getPrincipal();
-    Profile profile = user.getProfile();
+    Users users = (Users) auth.getPrincipal();
+    Profile profile = users.getProfile();
 
     Entity entity = getRepository().findById(request.getId())
             .filter(doc -> doc.getOwner().getId().equals(profile.getId()))

@@ -1,6 +1,6 @@
 package com.dilon.filemanagerapp.profile.model;
 
-import com.dilon.filemanagerapp.auth.model.User;
+import com.dilon.filemanagerapp.auth.model.Users;
 import com.dilon.filemanagerapp.general.info.career.model.Career;
 import com.dilon.filemanagerapp.general.info.experience.model.Experience;
 import com.dilon.filemanagerapp.general.info.teaching.model.Teaching;
@@ -11,22 +11,25 @@ import lombok.experimental.SuperBuilder;
 import java.util.List;
 
 
+@Entity
+@Table(name = "profile")
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 @Getter
 @Setter
-@Entity
-@PrimaryKeyJoinColumn(name = "id")
-@Table(name = "profile")
-public class Profile extends User {
-    private String profilePictureUrl;
+public class Profile {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private String profilePictureUrl;
     private String bio;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private Users user;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Experience> experiences;
@@ -36,6 +39,5 @@ public class Profile extends User {
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Career> careers;
-
-
 }
+

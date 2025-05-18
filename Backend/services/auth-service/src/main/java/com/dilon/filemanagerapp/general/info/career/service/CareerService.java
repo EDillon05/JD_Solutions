@@ -22,8 +22,8 @@ public class CareerService extends BaseDocumentService<Career, CareerRequest, Ca
 
 
 //    public PageResponse<CareerResponse> findAllCareersByOwner(int page, int size, Authentication auth) {
-//        User user = (User) auth.getPrincipal();
-//        Profile profile = user.getProfile();
+//        Users users = (Users) auth.getPrincipal();
+//        Profile profile = users.getProfile();
 //
 //        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
 //        Page<Career> careers = careerRepository.findAll(withOwnerId(profile.getId()), pageable);
@@ -47,8 +47,8 @@ public class CareerService extends BaseDocumentService<Career, CareerRequest, Ca
 //            @Valid CareerRequest request,
 //            Authentication auth
 //    ) {
-//        User user = (User) auth.getPrincipal();
-//        Profile profile = user.getProfile();
+//        Users users = (Users) auth.getPrincipal();
+//        Profile profile = users.getProfile();
 //
 //        var career = this.careerRepository.findById(request.id())
 //                .orElseThrow(() -> new EntityNotFoundException("Career not found with id: " + request.id()
@@ -117,8 +117,8 @@ public class CareerService extends BaseDocumentService<Career, CareerRequest, Ca
 //    }
 
 //    public PageResponse<CareerResponse> searchByFilters(int page, int size, String keyword, String type, LocalDateTime startedAt, LocalDateTime finishedAt, Authentication auth) {
-//        User user = (User) auth.getPrincipal();
-//        Profile profile = user.getProfile();
+//        Users users = (Users) auth.getPrincipal();
+//        Profile profile = users.getProfile();
 //
 //        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
 //

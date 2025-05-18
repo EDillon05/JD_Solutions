@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS recognition (
     institution_given VARCHAR(255) NOT NULL,
     reason VARCHAR(255) NOT NULL,
     level VARCHAR(255) NOT NULL,
-    type VARCHAR(255) NOT NULL,
+    type_of_recognition VARCHAR(255) NOT NULL,
     CONSTRAINT fk_recognition_base_document FOREIGN KEY (id) REFERENCES base_document_entity(id) ON DELETE CASCADE
 );
 

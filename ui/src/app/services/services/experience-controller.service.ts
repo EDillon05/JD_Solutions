@@ -11,20 +11,20 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { deleteById1 } from '../fn/experience-controller/delete-by-id-1';
-import { DeleteById1$Params } from '../fn/experience-controller/delete-by-id-1';
+import { deleteById4 } from '../fn/experience-controller/delete-by-id-4';
+import { DeleteById4$Params } from '../fn/experience-controller/delete-by-id-4';
 import { ExperienceResponse } from '../models/experience-response';
-import { findAllByOwner1 } from '../fn/experience-controller/find-all-by-owner-1';
-import { FindAllByOwner1$Params } from '../fn/experience-controller/find-all-by-owner-1';
-import { findById1 } from '../fn/experience-controller/find-by-id-1';
-import { FindById1$Params } from '../fn/experience-controller/find-by-id-1';
+import { findAllByOwner4 } from '../fn/experience-controller/find-all-by-owner-4';
+import { FindAllByOwner4$Params } from '../fn/experience-controller/find-all-by-owner-4';
+import { findById4 } from '../fn/experience-controller/find-by-id-4';
+import { FindById4$Params } from '../fn/experience-controller/find-by-id-4';
 import { PageResponseExperienceResponse } from '../models/page-response-experience-response';
-import { save1 } from '../fn/experience-controller/save-1';
-import { Save1$Params } from '../fn/experience-controller/save-1';
-import { searchByFilters1 } from '../fn/experience-controller/search-by-filters-1';
-import { SearchByFilters1$Params } from '../fn/experience-controller/search-by-filters-1';
-import { update1 } from '../fn/experience-controller/update-1';
-import { Update1$Params } from '../fn/experience-controller/update-1';
+import { save4 } from '../fn/experience-controller/save-4';
+import { Save4$Params } from '../fn/experience-controller/save-4';
+import { searchByFilters4 } from '../fn/experience-controller/search-by-filters-4';
+import { SearchByFilters4$Params } from '../fn/experience-controller/search-by-filters-4';
+import { update4 } from '../fn/experience-controller/update-4';
+import { Update4$Params } from '../fn/experience-controller/update-4';
 
 @Injectable({ providedIn: 'root' })
 export class ExperienceControllerService extends BaseService {
@@ -32,152 +32,152 @@ export class ExperienceControllerService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `update1()` */
-  static readonly Update1Path = '/experiences';
+  /** Path part for operation `update4()` */
+  static readonly Update4Path = '/experiences';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update1()` instead.
+   * To access only the response body, use `update4()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update1$Response(params: Update1$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-    return update1(this.http, this.rootUrl, params, context);
+  update4$Response(params: Update4$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+    return update4(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update1$Response()` instead.
+   * To access the full response (for headers, for example), `update4$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update1(params: Update1$Params, context?: HttpContext): Observable<number> {
-    return this.update1$Response(params, context).pipe(
+  update4(params: Update4$Params, context?: HttpContext): Observable<number> {
+    return this.update4$Response(params, context).pipe(
       map((r: StrictHttpResponse<number>): number => r.body)
     );
   }
 
-  /** Path part for operation `save1()` */
-  static readonly Save1Path = '/experiences';
+  /** Path part for operation `save4()` */
+  static readonly Save4Path = '/experiences';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `save1()` instead.
+   * To access only the response body, use `save4()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save1$Response(params: Save1$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-    return save1(this.http, this.rootUrl, params, context);
+  save4$Response(params: Save4$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+    return save4(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `save1$Response()` instead.
+   * To access the full response (for headers, for example), `save4$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save1(params: Save1$Params, context?: HttpContext): Observable<number> {
-    return this.save1$Response(params, context).pipe(
+  save4(params: Save4$Params, context?: HttpContext): Observable<number> {
+    return this.save4$Response(params, context).pipe(
       map((r: StrictHttpResponse<number>): number => r.body)
     );
   }
 
-  /** Path part for operation `findById1()` */
-  static readonly FindById1Path = '/experiences/{experience-id}';
+  /** Path part for operation `findById4()` */
+  static readonly FindById4Path = '/experiences/{experience-id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById1()` instead.
+   * To access only the response body, use `findById4()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById1$Response(params: FindById1$Params, context?: HttpContext): Observable<StrictHttpResponse<ExperienceResponse>> {
-    return findById1(this.http, this.rootUrl, params, context);
+  findById4$Response(params: FindById4$Params, context?: HttpContext): Observable<StrictHttpResponse<ExperienceResponse>> {
+    return findById4(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById1$Response()` instead.
+   * To access the full response (for headers, for example), `findById4$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById1(params: FindById1$Params, context?: HttpContext): Observable<ExperienceResponse> {
-    return this.findById1$Response(params, context).pipe(
+  findById4(params: FindById4$Params, context?: HttpContext): Observable<ExperienceResponse> {
+    return this.findById4$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExperienceResponse>): ExperienceResponse => r.body)
     );
   }
 
-  /** Path part for operation `deleteById1()` */
-  static readonly DeleteById1Path = '/experiences/{experience-id}';
+  /** Path part for operation `deleteById4()` */
+  static readonly DeleteById4Path = '/experiences/{experience-id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteById1()` instead.
+   * To access only the response body, use `deleteById4()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteById1$Response(params: DeleteById1$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return deleteById1(this.http, this.rootUrl, params, context);
+  deleteById4$Response(params: DeleteById4$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return deleteById4(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteById1$Response()` instead.
+   * To access the full response (for headers, for example), `deleteById4$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteById1(params: DeleteById1$Params, context?: HttpContext): Observable<void> {
-    return this.deleteById1$Response(params, context).pipe(
+  deleteById4(params: DeleteById4$Params, context?: HttpContext): Observable<void> {
+    return this.deleteById4$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
-  /** Path part for operation `searchByFilters1()` */
-  static readonly SearchByFilters1Path = '/experiences/search';
+  /** Path part for operation `searchByFilters4()` */
+  static readonly SearchByFilters4Path = '/experiences/search';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `searchByFilters1()` instead.
+   * To access only the response body, use `searchByFilters4()` instead.
    *
    * This method doesn't expect any request body.
    */
-  searchByFilters1$Response(params?: SearchByFilters1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseExperienceResponse>> {
-    return searchByFilters1(this.http, this.rootUrl, params, context);
+  searchByFilters4$Response(params?: SearchByFilters4$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseExperienceResponse>> {
+    return searchByFilters4(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `searchByFilters1$Response()` instead.
+   * To access the full response (for headers, for example), `searchByFilters4$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  searchByFilters1(params?: SearchByFilters1$Params, context?: HttpContext): Observable<PageResponseExperienceResponse> {
-    return this.searchByFilters1$Response(params, context).pipe(
+  searchByFilters4(params?: SearchByFilters4$Params, context?: HttpContext): Observable<PageResponseExperienceResponse> {
+    return this.searchByFilters4$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageResponseExperienceResponse>): PageResponseExperienceResponse => r.body)
     );
   }
 
-  /** Path part for operation `findAllByOwner1()` */
-  static readonly FindAllByOwner1Path = '/experiences/owner';
+  /** Path part for operation `findAllByOwner4()` */
+  static readonly FindAllByOwner4Path = '/experiences/owner';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAllByOwner1()` instead.
+   * To access only the response body, use `findAllByOwner4()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAllByOwner1$Response(params?: FindAllByOwner1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseExperienceResponse>> {
-    return findAllByOwner1(this.http, this.rootUrl, params, context);
+  findAllByOwner4$Response(params?: FindAllByOwner4$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseExperienceResponse>> {
+    return findAllByOwner4(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAllByOwner1$Response()` instead.
+   * To access the full response (for headers, for example), `findAllByOwner4$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAllByOwner1(params?: FindAllByOwner1$Params, context?: HttpContext): Observable<PageResponseExperienceResponse> {
-    return this.findAllByOwner1$Response(params, context).pipe(
+  findAllByOwner4(params?: FindAllByOwner4$Params, context?: HttpContext): Observable<PageResponseExperienceResponse> {
+    return this.findAllByOwner4$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageResponseExperienceResponse>): PageResponseExperienceResponse => r.body)
     );
   }

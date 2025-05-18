@@ -7,8 +7,10 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { TeachingControllerService } from './services/teaching-controller.service';
-import { ExperienceControllerService } from './services/experience-controller.service';
+import { ResearchService } from './services/research.service';
+import { RecognitionService } from './services/recognition.service';
 import { GeneralInfoService } from './services/general-info.service';
+import { ExperienceControllerService } from './services/experience-controller.service';
 import { AuthenticationService } from './services/authentication.service';
 
 /**
@@ -20,8 +22,10 @@ import { AuthenticationService } from './services/authentication.service';
   declarations: [],
   providers: [
     TeachingControllerService,
-    ExperienceControllerService,
+    ResearchService,
+    RecognitionService,
     GeneralInfoService,
+    ExperienceControllerService,
     AuthenticationService,
     ApiConfiguration
   ],

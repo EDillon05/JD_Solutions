@@ -1,11 +1,11 @@
 package com.dilon.filemanagerapp.auth.repository;
 
-import com.dilon.filemanagerapp.auth.model.User;
+import com.dilon.filemanagerapp.auth.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<Users, Integer> {
 
-    Optional<User> findByEmail(String email);
+    Optional<Users> findByEmail(String email);
 }

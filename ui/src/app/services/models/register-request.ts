@@ -4,6 +4,7 @@
 
 export interface RegisterRequest {
   email: string;
+  id?: number;
   lastName1: string;
   lastName2?: string;
   name: string;

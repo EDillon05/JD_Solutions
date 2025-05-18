@@ -1,8 +1,8 @@
 -- Tabla de perfil
 CREATE TABLE IF NOT EXISTS profile (
     id SERIAL PRIMARY KEY,
-    profile_picture_url VARCHAR(255) NOT NULL,
-    bio VARCHAR(255) NOT NULL,
+    profile_picture_url VARCHAR(255),
+    bio VARCHAR(255),
     user_id INT NOT NULL,
     CONSTRAINT fk_profile_users FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );

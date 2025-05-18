@@ -2,16 +2,16 @@ package com.dilon.filemanagerapp.auth.service;
 
 import com.dilon.filemanagerapp.auth.dto.RegisterRequest;
 import com.dilon.filemanagerapp.auth.dto.UserResponse;
-import com.dilon.filemanagerapp.auth.model.User;
+import com.dilon.filemanagerapp.auth.model.Users;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
-    public User toUser(RegisterRequest request) {
+    public Users toUser(RegisterRequest request) {
         if (request == null) {
             return null;
         }
-        return User.builder()
+        return Users.builder()
                 .name(request.name())
                 .lastName1(request.lastName1())
                 .lastName2(request.lastName2())
@@ -22,21 +22,21 @@ public class UserMapper {
                 .build();
     }
 
-    public UserResponse fromUser(User user) {
-        if (user == null) {
+    public UserResponse fromUser(Users users) {
+        if (users == null) {
             return null;
         }
         return new UserResponse(
-                user.getId(),
-                user.getName(),
-                user.getLastName1(),
-                user.getLastName2(),
-                user.getEmail(),
-                user.getCreatedAt().toString(),
-                user.getLastModifiedAt().toString(),
-                user.getRoles().toString(),
-                user.isEnabled(),
-                user.isAccountLocked()
+                users.getId(),
+                users.getName(),
+                users.getLastName1(),
+                users.getLastName2(),
+                users.getEmail(),
+                users.getCreatedAt().toString(),
+                users.getLastModifiedAt().toString(),
+                users.getRoles().toString(),
+                users.isEnabled(),
+                users.isAccountLocked()
         );
 
     }

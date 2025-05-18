@@ -6,12 +6,14 @@ import com.dilon.filemanagerapp.auth.dto.RegisterRequest;
 import com.dilon.filemanagerapp.auth.dto.UserResponse;
 import com.dilon.filemanagerapp.email.EmailService;
 import com.dilon.filemanagerapp.email.EmailTemplateName;
-import com.dilon.filemanagerapp.auth.model.User;
+import com.dilon.filemanagerapp.auth.model.Users;
 import com.dilon.filemanagerapp.auth.repository.RoleRepository;
 import com.dilon.filemanagerapp.auth.repository.TokenRepository;
 import com.dilon.filemanagerapp.auth.repository.UserRepository;
 import com.dilon.filemanagerapp.auth.security.JwtService;
 import com.dilon.filemanagerapp.auth.security.Token;
+
+import com.dilon.filemanagerapp.profile.model.Profile;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,6 +49,9 @@ public class AuthService {
 
 
     public void registerUser(RegisterRequest request) throws MessagingException {
+        if (userRepository.findByEmail(request.email()).isPresent()) {
+            throw new RuntimeException("User already exists");
+        }
         var userRole = roleRepository.findByName("USER")
                 .orElseThrow(() -> new RuntimeException("Role not found: USER"));
 
@@ -56,18 +61,23 @@ public class AuthService {
 
         user.setRoles(Set.of(userRole));
 
-        userRepository.save(user);
+        Profile profile = new Profile();
+        profile.setUser(user); // Importante
+        user.setProfile(profile); // Importante
+
+        userRepository.save(user); // Cascade guarda el perfil también
 
         sendValidationEmail(user);
+
     }
 
-    private void sendValidationEmail(User user) throws MessagingException {
-        var newToken = generateAndSaveActivationToken(user);
+    private void sendValidationEmail(Users users) throws MessagingException {
+        var newToken = generateAndSaveActivationToken(users);
         // send email
 
         emailService.sendEmail(
-                user.getEmail(),
-                user.fullName(),
+                users.getEmail(),
+                users.fullName(),
                 EmailTemplateName.ACTIVATE_ACCOUNT,
                 activationUrl,
                 newToken,
@@ -75,13 +85,13 @@ public class AuthService {
         );
     }
 
-    private String generateAndSaveActivationToken(User user) {
+    private String generateAndSaveActivationToken(Users users) {
         String generatedToken = generateActivationCode(6);
         var token = Token.builder()
                 .token(generatedToken)
                 .createdAt(LocalDateTime.now())
                 .expiresAt(LocalDateTime.now().plusMinutes(15))
-                .user(user)
+                .users(users)
                 .build();
 
         tokenRepository.save(token);
@@ -109,7 +119,7 @@ public class AuthService {
                 )
         );
         var claims = new HashMap<String, Object>();
-        var user = ((User) auth.getPrincipal());
+        var user = ((Users) auth.getPrincipal());
         claims.put("fullName", user.fullName());
         var jwtToken = jwtService.generateToken(claims, user);
         return AuthenticationResponse.builder().token(jwtToken).build();
@@ -125,7 +135,7 @@ public class AuthService {
     public UserResponse findById(Integer id) {
         return repository.findById(id)
                 .map(this.mapper::fromUser)
-                .orElseThrow(() -> new RuntimeException("User not found: " + id));
+                .orElseThrow(() -> new RuntimeException("Users not found: " + id));
     }
 
     //@Transactional
@@ -133,15 +143,16 @@ public class AuthService {
         Token savedToken = tokenRepository.findByToken(token)
                 .orElseThrow(() -> new RuntimeException("Invalid token"));
         if (LocalDateTime.now().isAfter(savedToken.getExpiresAt())) {
-            sendValidationEmail(savedToken.getUser());
+            sendValidationEmail(savedToken.getUsers());
             throw new RuntimeException("Token expired. A new token has been sent to the same email address.");
         }
-        var user = userRepository.findById(savedToken.getUser().getId())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        var user = userRepository.findById(savedToken.getUsers().getId())
+                .orElseThrow(() -> new UsernameNotFoundException("Users not found"));
         user.setEnabled(true);
         userRepository.save(user);
         savedToken.setValidatedAt(LocalDateTime.now());
         tokenRepository.save(savedToken);
     }
 }
+
 

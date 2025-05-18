@@ -1,5 +1,6 @@
 package com.dilon.filemanagerapp.auth.dto;
 
+import com.dilon.filemanagerapp.common.repository.UpdateRequest;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -26,6 +27,10 @@ public record RegisterRequest(
         @Pattern(regexp = ".*[A-Z].*", message = "password must contain at least one uppercase letter")
         @Pattern(regexp = ".*[0-9].*", message = "password must contain at least one number")
         String password
-) {
+) implements UpdateRequest {
+    @Override
+    public Integer getId() {
+        return null;
+    }
 }
 

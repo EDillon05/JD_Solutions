@@ -6,7 +6,7 @@ export interface CareerRequest {
   certification_name: string;
   comment?: string;
   country: string;
-  description: string;
+  description?: string;
   finishedAt: string;
   graduation_date: string;
   id?: number;

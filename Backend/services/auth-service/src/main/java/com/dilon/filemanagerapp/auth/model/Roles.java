@@ -39,7 +39,7 @@ public class Roles {
 
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
-    private List<User> users;
+    private List<Users> users;
 
     @ManyToMany
     @JoinTable(

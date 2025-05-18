@@ -8,8 +8,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/administrative")
-@Tag(name = "General Info", description = "General Info API")
+@RequestMapping("/researches")
+@Tag(name = "research", description = "General Info API")
 public class ResearchController extends BaseDocumentController<ResearchRequest, ResearchResponse, ResearchService> {
 
     public ResearchController(ResearchService service) {

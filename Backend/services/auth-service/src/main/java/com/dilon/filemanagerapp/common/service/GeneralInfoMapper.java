@@ -12,6 +12,9 @@ import com.dilon.filemanagerapp.general.info.experience.model.Experience;
 import com.dilon.filemanagerapp.general.info.project.dto.ProjectRequest;
 import com.dilon.filemanagerapp.general.info.project.dto.ProjectResponse;
 import com.dilon.filemanagerapp.general.info.project.model.Project;
+import com.dilon.filemanagerapp.general.info.recognition.dto.RecognitionRequest;
+import com.dilon.filemanagerapp.general.info.recognition.dto.RecognitionResponse;
+import com.dilon.filemanagerapp.general.info.recognition.model.Recognition;
 import com.dilon.filemanagerapp.general.info.research.dto.ResearchRequest;
 import com.dilon.filemanagerapp.general.info.research.dto.ResearchResponse;
 import com.dilon.filemanagerapp.general.info.research.model.Research;
@@ -299,6 +302,49 @@ public class GeneralInfoMapper {
                 entity.getProjectLink(),
                 entity.getPublicationDate(),
                 entity.getDisciplinaryArea()
+        );
+    }
+
+    public Recognition toRecognition(RecognitionRequest req) {
+        if (req == null) {
+            return null;
+        }
+        return Recognition.builder()
+                .name(req.name())
+                .type(req.type())
+                .description(req.description())
+                .country(req.country())
+                .startedAt(req.startedAt())
+                .finishedAt(req.finishedAt())
+                .comment(req.comment())
+                .url(req.url())
+                .status(req.status())
+                .institutionGiven(req.institutionGiven())
+                .reason(req.reason())
+                .level(req.level())
+                .typeOfRecognition(req.typeOfRecognition())
+                .build();
+    }
+
+    public RecognitionResponse toRecognitionResponse(Recognition entity) {
+        if (entity == null) {
+            return null;
+        }
+        return new RecognitionResponse(
+                entity.getId(),
+                entity.getName(),
+                entity.getType(),
+                entity.getDescription(),
+                entity.getCountry(),
+                entity.getStartedAt(),
+                entity.getFinishedAt(),
+                entity.getComment(),
+                entity.getUrl(),
+                entity.getStatus(),
+                entity.getInstitutionGiven(),
+                entity.getReason(),
+                entity.getLevel(),
+                entity.getTypeOfRecognition()
         );
     }
 }

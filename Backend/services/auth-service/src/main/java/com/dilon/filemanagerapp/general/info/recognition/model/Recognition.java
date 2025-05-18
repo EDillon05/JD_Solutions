@@ -22,5 +22,5 @@ public class Recognition extends BaseDocumentEntity {
     private String institutionGiven;
     private String reason;
     private String level;
-    private String type;
+    private String typeOfRecognition; //e.g. award, certificate, etc.
 }

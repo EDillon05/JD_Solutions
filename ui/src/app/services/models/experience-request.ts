@@ -8,7 +8,7 @@ export interface ExperienceRequest {
   companyName: string;
   contractType: string;
   country: string;
-  description: string;
+  description?: string;
   finishedAt: string;
   id?: number;
   name: string;
