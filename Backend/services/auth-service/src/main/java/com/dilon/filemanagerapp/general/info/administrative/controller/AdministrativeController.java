@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/administrative")
-@Tag(name = "General Info", description = "General Info API")
+@Tag(name = "administrative", description = "General Info API")
 public class AdministrativeController extends BaseDocumentController<AdministrativeRequest, AdministrativeResponse, AdministrativeService> {
 
     public AdministrativeController(AdministrativeService service) {

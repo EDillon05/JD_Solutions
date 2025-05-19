@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/project")
-@Tag(name = "General Info", description = "General Info API")
+@Tag(name = "project", description = "General Info API")
 public class ProjectController extends BaseDocumentController<ProjectRequest, ProjectResponse, ProjectService> {
 
     public ProjectController(ProjectService service) {

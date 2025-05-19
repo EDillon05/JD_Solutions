@@ -4,6 +4,7 @@ import com.dilon.filemanagerapp.common.dto.PageResponse;
 import com.dilon.filemanagerapp.general.info.experience.dto.ExperienceRequest;
 import com.dilon.filemanagerapp.general.info.experience.dto.ExperienceResponse;
 import com.dilon.filemanagerapp.general.info.experience.service.ExperienceService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequestMapping("/experiences")
 @RequiredArgsConstructor
+@Tag(name = "experience", description = "General Info API")
 public class ExperienceController {
 
     private final ExperienceService experienceService;

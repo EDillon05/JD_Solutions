@@ -4,6 +4,7 @@ import com.dilon.filemanagerapp.common.dto.PageResponse;
 import com.dilon.filemanagerapp.general.info.teaching.dto.TeachingRequest;
 import com.dilon.filemanagerapp.general.info.teaching.dto.TeachingResponse;
 import com.dilon.filemanagerapp.general.info.teaching.service.TeachingService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequestMapping("/teachings")
 @RequiredArgsConstructor
+@Tag(name = "teaching", description = "General Info API")
 public class TeachingController {
 
 
