@@ -1,9 +1,12 @@
 package com.dilon.filemanagerapp.profile.dto;
 
-
 import java.time.LocalDateTime;
 
-public record ProfileRequest(
+public record ProfileResponse(
+        String name,
+        String firstLastName,
+        String secondLastName,
+        String email,
         String gender,
         LocalDateTime dateOfBirth,
         String age,

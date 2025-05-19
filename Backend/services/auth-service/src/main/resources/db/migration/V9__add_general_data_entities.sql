@@ -1,6 +1,13 @@
 -- Tabla de perfil
 CREATE TABLE IF NOT EXISTS profile (
     id SERIAL PRIMARY KEY,
+    gender VARCHAR(10),
+    date_of_birth TIMESTAMP,
+    age VARCHAR(3),
+    phone_number VARCHAR(20),
+    state VARCHAR(255),
+    city VARCHAR(255),
+    address VARCHAR(255),
     profile_picture_url VARCHAR(255),
     bio VARCHAR(255),
     user_id INT NOT NULL,

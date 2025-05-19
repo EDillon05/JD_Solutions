@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -23,7 +24,13 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    private String gender;
+    private LocalDateTime dateOfBirth;
+    private String age;
+    private String phoneNumber;
+    private String state;
+    private String city;
+    private String address;
     private String profilePictureUrl;
     private String bio;
 
