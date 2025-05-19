@@ -35,7 +35,7 @@ login() {
   }).subscribe({
     next: (res) => {
       this.tokenSeervice.token = res.token as string;
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['documents']);
     },
     error: (err) => {
       console.log('Error recibido del backend:', err);

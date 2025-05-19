@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary px-3">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" routerLink="/">CLI</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Menú izquierdo -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/documents">
+            <i class="fas fa-home-alt me-1"></i>Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/careers">
+            <i class="fas fa-graduation-cap me-1"></i>Careers
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/experiences">
+            <i class="fas fa-briefcase me-1"></i>Experiences
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/administrative">
+            <i class="fas fa-book me-1"></i>Administrative
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/teachings">
+            <i class="fas fa-school me-1"></i>Teachings
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/researches">
+            <i class="fas fa-microscope me-1"></i>Researches
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/recognitions">
+            <i class="fas fa-award me-1"></i>Recognitions
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/projects">
+            <i class="fas fa-file-archive me-1"></i>Projects
+          </a>
+        </li>
+      </ul>
+      <!-- Formulario de búsqueda + usuario -->
+      <form class="d-flex align-items-center gap-2" role="search">
+        <input class="form-control" type="text" placeholder="Find a CV" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+        <span class="fw-bold text-capitalize">Hi, Someone</span>
+        <button class="btn btn-link" type="button" (click)="logout()" title="Logout">
+          <i class="fas fa-door-open"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
+
