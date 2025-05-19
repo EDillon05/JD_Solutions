@@ -1,5 +1,6 @@
 package com.dilon.filemanagerapp.general.info.recognition.service;
 
+import com.dilon.filemanagerapp.common.file.FileStorageService;
 import com.dilon.filemanagerapp.common.service.BaseDocumentService;
 import com.dilon.filemanagerapp.common.service.GeneralInfoMapper;
 import com.dilon.filemanagerapp.general.info.project.dto.ProjectRequest;
@@ -22,6 +23,7 @@ public class RecognitionService extends BaseDocumentService<Recognition, Recogni
     private final GeneralInfoMapper generalInfoMapper;
     private final RecognitonRepository recognitonRepository;
 
+    private final FileStorageService fileStorageService;
 
     @Override
     protected JpaRepository<Recognition, Integer> getRepository() {
@@ -41,5 +43,15 @@ public class RecognitionService extends BaseDocumentService<Recognition, Recogni
     @Override
     protected JpaSpecificationExecutor<Recognition> getSpecificationExecutor() {
         return recognitonRepository;
+    }
+
+    @Override
+    protected String getEntityFolderName() {
+        return "administrative";
+    }
+
+    @Override
+    protected FileStorageService getFileStorageService() {
+        return fileStorageService;
     }
 }

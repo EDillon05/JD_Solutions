@@ -1,5 +1,6 @@
 package com.dilon.filemanagerapp.general.info.career.service;
 
+import com.dilon.filemanagerapp.common.file.FileStorageService;
 import com.dilon.filemanagerapp.common.service.BaseDocumentService;
 import com.dilon.filemanagerapp.common.service.GeneralInfoMapper;
 import com.dilon.filemanagerapp.general.info.administrative.dto.AdministrativeRequest;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class CareerService extends BaseDocumentService<Career, CareerRequest, CareerResponse> {
+
+    private final FileStorageService fileStorageService;
 
     private final CareerRepository careerRepository;
 
@@ -43,6 +46,17 @@ public class CareerService extends BaseDocumentService<Career, CareerRequest, Ca
     protected JpaSpecificationExecutor<Career> getSpecificationExecutor() {
         return careerRepository;
     }
+
+    @Override
+    protected String getEntityFolderName() {
+        return "administrative";
+    }
+
+    @Override
+    protected FileStorageService getFileStorageService() {
+        return fileStorageService;
+    }
+
 }
 
 

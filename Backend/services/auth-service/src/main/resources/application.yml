@@ -55,3 +55,6 @@ application:
   mailing:
     frontend:
       activation-url: http://localhost:4200/activate-account
+  file:
+    upload:
+      documents-output-path: ./uploads

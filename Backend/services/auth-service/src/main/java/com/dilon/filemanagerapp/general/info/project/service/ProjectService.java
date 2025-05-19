@@ -1,5 +1,6 @@
 package com.dilon.filemanagerapp.general.info.project.service;
 
+import com.dilon.filemanagerapp.common.file.FileStorageService;
 import com.dilon.filemanagerapp.common.service.BaseDocumentService;
 import com.dilon.filemanagerapp.common.service.GeneralInfoMapper;
 import com.dilon.filemanagerapp.general.info.project.dto.ProjectRequest;
@@ -18,6 +19,8 @@ public class ProjectService extends BaseDocumentService<Project, ProjectRequest,
     private final ProjectRepository projectRepository;
 
     private final GeneralInfoMapper generalInfoMapper;
+
+    private final FileStorageService fileStorageService;
 
 
     @Override
@@ -38,5 +41,15 @@ public class ProjectService extends BaseDocumentService<Project, ProjectRequest,
     @Override
     protected JpaSpecificationExecutor<Project> getSpecificationExecutor() {
         return projectRepository;
+    }
+
+    @Override
+    protected String getEntityFolderName() {
+        return "administrative";
+    }
+
+    @Override
+    protected FileStorageService getFileStorageService() {
+        return fileStorageService;
     }
 }

@@ -2,6 +2,7 @@ package com.dilon.filemanagerapp.general.info.experience.service;
 
 
 
+import com.dilon.filemanagerapp.common.file.FileStorageService;
 import com.dilon.filemanagerapp.common.service.BaseDocumentService;
 import com.dilon.filemanagerapp.general.info.experience.dto.ExperienceRequest;
 import com.dilon.filemanagerapp.general.info.experience.dto.ExperienceResponse;
@@ -22,6 +23,7 @@ public class ExperienceService extends BaseDocumentService<Experience, Experienc
 
     private final GeneralInfoMapper generalInfoMapper;
 
+    private final FileStorageService fileStorageService;
 
     @Override
     protected JpaRepository<Experience, Integer> getRepository() {
@@ -41,6 +43,16 @@ public class ExperienceService extends BaseDocumentService<Experience, Experienc
     @Override
     protected JpaSpecificationExecutor<Experience> getSpecificationExecutor() {
         return experienceRepository;
+    }
+
+    @Override
+    protected String getEntityFolderName() {
+        return "administrative";
+    }
+
+    @Override
+    protected FileStorageService getFileStorageService() {
+        return fileStorageService;
     }
 }
 

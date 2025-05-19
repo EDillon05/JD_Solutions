@@ -2,6 +2,7 @@ package com.dilon.filemanagerapp.common.service;
 
 import com.dilon.filemanagerapp.auth.model.Users;
 import com.dilon.filemanagerapp.common.dto.PageResponse;
+import com.dilon.filemanagerapp.common.file.FileStorageService;
 import com.dilon.filemanagerapp.common.model.BaseDocumentEntity;
 import com.dilon.filemanagerapp.common.repository.UpdateRequest;
 import com.dilon.filemanagerapp.profile.model.Profile;
@@ -16,6 +17,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,6 +30,10 @@ public abstract class BaseDocumentService<Entity extends BaseDocumentEntity, Req
     protected abstract JpaRepository<Entity, Integer> getRepository();
 
     protected abstract JpaSpecificationExecutor<Entity> getSpecificationExecutor();
+
+    protected abstract String getEntityFolderName();
+
+    protected abstract FileStorageService getFileStorageService();
 
     protected abstract Entity mapToEntity(Req req);
 
@@ -116,19 +122,30 @@ public abstract class BaseDocumentService<Entity extends BaseDocumentEntity, Req
         getRepository().delete(entity);
     }
 
-public void update(@Valid Req request, Authentication auth) {
-    Users users = (Users) auth.getPrincipal();
-    Profile profile = users.getProfile();
+    public void update(@Valid Req request, Authentication auth) {
+        Users users = (Users) auth.getPrincipal();
+        Profile profile = users.getProfile();
 
-    Entity entity = getRepository().findById(request.getId())
-            .filter(doc -> doc.getOwner().getId().equals(profile.getId()))
-            .orElseThrow(() -> new EntityNotFoundException("Document not found or access denied with id: " + request.getId()));
+        Entity entity = getRepository().findById(request.getId())
+                .filter(doc -> doc.getOwner().getId().equals(profile.getId()))
+                .orElseThrow(() -> new EntityNotFoundException("Document not found or access denied with id: " + request.getId()));
 
-    Entity updatedEntity = mapToEntity(request);
-    updatedEntity.setId(entity.getId());
-    updatedEntity.setOwner(entity.getOwner());
+        Entity updatedEntity = mapToEntity(request);
+        updatedEntity.setId(entity.getId());
+        updatedEntity.setOwner(entity.getOwner());
 
-    getRepository().save(updatedEntity);
-}
+        getRepository().save(updatedEntity);
+    }
+
+    public void uploadFile(Integer id, MultipartFile file, Authentication auth) {
+        Entity entity = getRepository().findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Document not found with id: " + id));
+        Users users = (Users) auth.getPrincipal();
+        Profile profile = users.getProfile();
+        var folderName = getEntityFolderName() + "/";
+        var fileName = getFileStorageService().saveFile(file, folderName, profile.getId());
+        entity.setUrl(fileName);
+        getRepository().save(entity);
+    }
 }
 

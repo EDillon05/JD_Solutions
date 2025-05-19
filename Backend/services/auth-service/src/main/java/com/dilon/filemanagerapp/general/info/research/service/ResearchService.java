@@ -1,5 +1,6 @@
 package com.dilon.filemanagerapp.general.info.research.service;
 
+import com.dilon.filemanagerapp.common.file.FileStorageService;
 import com.dilon.filemanagerapp.common.service.BaseDocumentService;
 import com.dilon.filemanagerapp.common.service.GeneralInfoMapper;
 import com.dilon.filemanagerapp.general.info.research.dto.ResearchRequest;
@@ -18,6 +19,8 @@ public class ResearchService extends BaseDocumentService<Research, ResearchReque
     private final ResearchRepository researchRepository;
 
     private final GeneralInfoMapper generalInfoMapper;
+
+    private final FileStorageService fileStorageService;
 
 
     @Override
@@ -38,5 +41,15 @@ public class ResearchService extends BaseDocumentService<Research, ResearchReque
     @Override
     protected JpaSpecificationExecutor<Research> getSpecificationExecutor() {
         return researchRepository;
+    }
+
+    @Override
+    protected String getEntityFolderName() {
+        return "administrative";
+    }
+
+    @Override
+    protected FileStorageService getFileStorageService() {
+        return fileStorageService;
     }
 }

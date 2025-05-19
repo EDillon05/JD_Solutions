@@ -1,5 +1,6 @@
 package com.dilon.filemanagerapp.general.info.administrative.service;
 
+import com.dilon.filemanagerapp.common.file.FileStorageService;
 import com.dilon.filemanagerapp.common.service.BaseDocumentService;
 import com.dilon.filemanagerapp.common.service.GeneralInfoMapper;
 import com.dilon.filemanagerapp.general.info.administrative.dto.AdministrativeRequest;
@@ -19,6 +20,7 @@ public class AdministrativeService extends BaseDocumentService<Administrative, A
 
     private final GeneralInfoMapper generalInfoMapper;
 
+    private final FileStorageService fileStorageService;
 
     @Override
     protected JpaRepository<Administrative, Integer> getRepository() {
@@ -38,5 +40,15 @@ public class AdministrativeService extends BaseDocumentService<Administrative, A
     @Override
     protected JpaSpecificationExecutor<Administrative> getSpecificationExecutor() {
         return administrativeRepository;
+    }
+
+    @Override
+    protected String getEntityFolderName() {
+        return "administrative";
+    }
+
+    @Override
+    protected FileStorageService getFileStorageService() {
+        return fileStorageService;
     }
 }

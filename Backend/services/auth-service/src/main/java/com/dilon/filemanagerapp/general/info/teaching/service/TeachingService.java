@@ -1,5 +1,6 @@
 package com.dilon.filemanagerapp.general.info.teaching.service;
 
+import com.dilon.filemanagerapp.common.file.FileStorageService;
 import com.dilon.filemanagerapp.common.service.BaseDocumentService;
 import com.dilon.filemanagerapp.common.service.GeneralInfoMapper;
 import com.dilon.filemanagerapp.general.info.teaching.dto.TeachingRequest;
@@ -18,6 +19,7 @@ public class TeachingService extends BaseDocumentService<Teaching, TeachingReque
 
     private final GeneralInfoMapper generalInfoMapper;
 
+    private final FileStorageService fileStorageService;
 
     @Override
     protected JpaRepository<Teaching, Integer> getRepository() {
@@ -37,5 +39,15 @@ public class TeachingService extends BaseDocumentService<Teaching, TeachingReque
     @Override
     protected JpaSpecificationExecutor<Teaching> getSpecificationExecutor() {
         return teachingRepository;
+    }
+
+    @Override
+    protected String getEntityFolderName() {
+        return "administrative";
+    }
+
+    @Override
+    protected FileStorageService getFileStorageService() {
+        return fileStorageService;
     }
 }

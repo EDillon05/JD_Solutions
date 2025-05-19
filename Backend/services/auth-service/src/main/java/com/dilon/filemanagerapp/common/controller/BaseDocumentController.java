@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -58,5 +59,16 @@ public abstract class BaseDocumentController<Req extends UpdateRequest, Res, Ser
         service.deleteById(id, auth);
         return ResponseEntity.accepted().build();
     }
+
+    @PostMapping(value = "/upload/{cv-id}", consumes = {"multipart/form-data"})
+    public ResponseEntity<String> uploadFile(
+            @PathVariable("cv-id") Integer curriculumId,
+            @RequestParam("file") MultipartFile file,
+            Authentication auth
+    ) {
+        service.uploadFile(curriculumId, file, auth);
+        return ResponseEntity.ok("File uploaded");
+    }
+
 }
 
