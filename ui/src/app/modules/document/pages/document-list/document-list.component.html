@@ -1,5 +1,5 @@
 <h3>Document List</h3>
 <hr>
 <div class="d-flex justify-content-start gap-2 flex-wrap">
-  Documents List
+  <span *ngFor="let administrative of administrativeResponse.content">{{administrative.description}}</span>
 </div>

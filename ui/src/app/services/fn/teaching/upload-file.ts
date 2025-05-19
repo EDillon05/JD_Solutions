@@ -8,16 +8,19 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { AdministrativeRequest } from '../../models/administrative-request';
 
-export interface Save5$Params {
-      body: AdministrativeRequest
+export interface UploadFile$Params {
+  'cv-id': number;
+      body?: {
+'file': Blob;
+}
 }
 
-export function save5(http: HttpClient, rootUrl: string, params: Save5$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-  const rb = new RequestBuilder(rootUrl, save5.PATH, 'post');
+export function uploadFile(http: HttpClient, rootUrl: string, params: UploadFile$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+  const rb = new RequestBuilder(rootUrl, uploadFile.PATH, 'post');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.path('cv-id', params['cv-id'], {});
+    rb.body(params.body, 'multipart/form-data');
   }
 
   return http.request(
@@ -25,9 +28,9 @@ export function save5(http: HttpClient, rootUrl: string, params: Save5$Params, c
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: parseFloat(String((r as HttpResponse<any>).body)) }) as StrictHttpResponse<number>;
+      return r as StrictHttpResponse<string>;
     })
   );
 }
 
-save5.PATH = '/administrative';
+uploadFile.PATH = '/teaching/upload/{cv-id}';

@@ -11,51 +11,11 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { AdministrativeResponse } from '../models/administrative-response';
-import { CareerResponse } from '../models/career-response';
-import { deleteById3 } from '../fn/general-info/delete-by-id-3';
-import { DeleteById3$Params } from '../fn/general-info/delete-by-id-3';
-import { deleteById5 } from '../fn/general-info/delete-by-id-5';
-import { DeleteById5$Params } from '../fn/general-info/delete-by-id-5';
-import { deleteById6 } from '../fn/general-info/delete-by-id-6';
-import { DeleteById6$Params } from '../fn/general-info/delete-by-id-6';
-import { findAllByOwner3 } from '../fn/general-info/find-all-by-owner-3';
-import { FindAllByOwner3$Params } from '../fn/general-info/find-all-by-owner-3';
-import { findAllByOwner5 } from '../fn/general-info/find-all-by-owner-5';
-import { FindAllByOwner5$Params } from '../fn/general-info/find-all-by-owner-5';
-import { findAllByOwner6 } from '../fn/general-info/find-all-by-owner-6';
-import { FindAllByOwner6$Params } from '../fn/general-info/find-all-by-owner-6';
-import { findById3 } from '../fn/general-info/find-by-id-3';
-import { FindById3$Params } from '../fn/general-info/find-by-id-3';
-import { findById5 } from '../fn/general-info/find-by-id-5';
-import { FindById5$Params } from '../fn/general-info/find-by-id-5';
-import { findById7 } from '../fn/general-info/find-by-id-7';
-import { FindById7$Params } from '../fn/general-info/find-by-id-7';
-import { PageResponseAdministrativeResponse } from '../models/page-response-administrative-response';
-import { PageResponseCareerResponse } from '../models/page-response-career-response';
-import { PageResponseProjectResponse } from '../models/page-response-project-response';
-import { Profile } from '../models/profile';
-import { ProjectResponse } from '../models/project-response';
-import { save3 } from '../fn/general-info/save-3';
-import { Save3$Params } from '../fn/general-info/save-3';
-import { save5 } from '../fn/general-info/save-5';
-import { Save5$Params } from '../fn/general-info/save-5';
-import { saveCareer } from '../fn/general-info/save-career';
-import { SaveCareer$Params } from '../fn/general-info/save-career';
-import { saveProfile } from '../fn/general-info/save-profile';
-import { SaveProfile$Params } from '../fn/general-info/save-profile';
-import { searchByFilters3 } from '../fn/general-info/search-by-filters-3';
-import { SearchByFilters3$Params } from '../fn/general-info/search-by-filters-3';
-import { searchByFilters5 } from '../fn/general-info/search-by-filters-5';
-import { SearchByFilters5$Params } from '../fn/general-info/search-by-filters-5';
-import { searchByFilters6 } from '../fn/general-info/search-by-filters-6';
-import { SearchByFilters6$Params } from '../fn/general-info/search-by-filters-6';
-import { update3 } from '../fn/general-info/update-3';
-import { Update3$Params } from '../fn/general-info/update-3';
-import { update5 } from '../fn/general-info/update-5';
-import { Update5$Params } from '../fn/general-info/update-5';
-import { update6 } from '../fn/general-info/update-6';
-import { Update6$Params } from '../fn/general-info/update-6';
+import { getProfile } from '../fn/general-info/get-profile';
+import { GetProfile$Params } from '../fn/general-info/get-profile';
+import { ProfileResponse } from '../models/profile-response';
+import { update4 } from '../fn/general-info/update-4';
+import { Update4$Params } from '../fn/general-info/update-4';
 
 
 /**
@@ -67,478 +27,53 @@ export class GeneralInfoService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `update3()` */
-  static readonly Update3Path = '/project';
+  /** Path part for operation `getProfile()` */
+  static readonly GetProfilePath = '/profile';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update3()` instead.
+   * To access only the response body, use `getProfile()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  update3$Response(params: Update3$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return update3(this.http, this.rootUrl, params, context);
+  getProfile$Response(params?: GetProfile$Params, context?: HttpContext): Observable<StrictHttpResponse<ProfileResponse>> {
+    return getProfile(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update3$Response()` instead.
+   * To access the full response (for headers, for example), `getProfile$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProfile(params?: GetProfile$Params, context?: HttpContext): Observable<ProfileResponse> {
+    return this.getProfile$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ProfileResponse>): ProfileResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `update4()` */
+  static readonly Update4Path = '/profile';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `update4()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update3(params: Update3$Params, context?: HttpContext): Observable<void> {
-    return this.update3$Response(params, context).pipe(
+  update4$Response(params: Update4$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return update4(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `update4$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  update4(params: Update4$Params, context?: HttpContext): Observable<void> {
+    return this.update4$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
-    );
-  }
-
-  /** Path part for operation `save3()` */
-  static readonly Save3Path = '/project';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `save3()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  save3$Response(params: Save3$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-    return save3(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `save3$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  save3(params: Save3$Params, context?: HttpContext): Observable<number> {
-    return this.save3$Response(params, context).pipe(
-      map((r: StrictHttpResponse<number>): number => r.body)
-    );
-  }
-
-  /** Path part for operation `update5()` */
-  static readonly Update5Path = '/careers';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update5()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  update5$Response(params: Update5$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return update5(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update5$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  update5(params: Update5$Params, context?: HttpContext): Observable<void> {
-    return this.update5$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
-    );
-  }
-
-  /** Path part for operation `saveCareer()` */
-  static readonly SaveCareerPath = '/careers';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `saveCareer()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  saveCareer$Response(params: SaveCareer$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-    return saveCareer(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `saveCareer$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  saveCareer(params: SaveCareer$Params, context?: HttpContext): Observable<number> {
-    return this.saveCareer$Response(params, context).pipe(
-      map((r: StrictHttpResponse<number>): number => r.body)
-    );
-  }
-
-  /** Path part for operation `update6()` */
-  static readonly Update6Path = '/administrative';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update6()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  update6$Response(params: Update6$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return update6(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update6$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  update6(params: Update6$Params, context?: HttpContext): Observable<void> {
-    return this.update6$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
-    );
-  }
-
-  /** Path part for operation `save5()` */
-  static readonly Save5Path = '/administrative';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `save5()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  save5$Response(params: Save5$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-    return save5(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `save5$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  save5(params: Save5$Params, context?: HttpContext): Observable<number> {
-    return this.save5$Response(params, context).pipe(
-      map((r: StrictHttpResponse<number>): number => r.body)
-    );
-  }
-
-  /** Path part for operation `saveProfile()` */
-  static readonly SaveProfilePath = '/profile/create';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `saveProfile()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  saveProfile$Response(params: SaveProfile$Params, context?: HttpContext): Observable<StrictHttpResponse<Profile>> {
-    return saveProfile(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `saveProfile$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  saveProfile(params: SaveProfile$Params, context?: HttpContext): Observable<Profile> {
-    return this.saveProfile$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Profile>): Profile => r.body)
-    );
-  }
-
-  /** Path part for operation `findById3()` */
-  static readonly FindById3Path = '/project/{id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById3()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findById3$Response(params: FindById3$Params, context?: HttpContext): Observable<StrictHttpResponse<ProjectResponse>> {
-    return findById3(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById3$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findById3(params: FindById3$Params, context?: HttpContext): Observable<ProjectResponse> {
-    return this.findById3$Response(params, context).pipe(
-      map((r: StrictHttpResponse<ProjectResponse>): ProjectResponse => r.body)
-    );
-  }
-
-  /** Path part for operation `deleteById3()` */
-  static readonly DeleteById3Path = '/project/{id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteById3()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteById3$Response(params: DeleteById3$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return deleteById3(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteById3$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteById3(params: DeleteById3$Params, context?: HttpContext): Observable<void> {
-    return this.deleteById3$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
-    );
-  }
-
-  /** Path part for operation `searchByFilters3()` */
-  static readonly SearchByFilters3Path = '/project/search';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `searchByFilters3()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  searchByFilters3$Response(params?: SearchByFilters3$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseProjectResponse>> {
-    return searchByFilters3(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `searchByFilters3$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  searchByFilters3(params?: SearchByFilters3$Params, context?: HttpContext): Observable<PageResponseProjectResponse> {
-    return this.searchByFilters3$Response(params, context).pipe(
-      map((r: StrictHttpResponse<PageResponseProjectResponse>): PageResponseProjectResponse => r.body)
-    );
-  }
-
-  /** Path part for operation `findAllByOwner3()` */
-  static readonly FindAllByOwner3Path = '/project/owner';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAllByOwner3()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findAllByOwner3$Response(params?: FindAllByOwner3$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseProjectResponse>> {
-    return findAllByOwner3(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAllByOwner3$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findAllByOwner3(params?: FindAllByOwner3$Params, context?: HttpContext): Observable<PageResponseProjectResponse> {
-    return this.findAllByOwner3$Response(params, context).pipe(
-      map((r: StrictHttpResponse<PageResponseProjectResponse>): PageResponseProjectResponse => r.body)
-    );
-  }
-
-  /** Path part for operation `findById5()` */
-  static readonly FindById5Path = '/careers/{career-id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById5()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findById5$Response(params: FindById5$Params, context?: HttpContext): Observable<StrictHttpResponse<CareerResponse>> {
-    return findById5(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById5$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findById5(params: FindById5$Params, context?: HttpContext): Observable<CareerResponse> {
-    return this.findById5$Response(params, context).pipe(
-      map((r: StrictHttpResponse<CareerResponse>): CareerResponse => r.body)
-    );
-  }
-
-  /** Path part for operation `deleteById5()` */
-  static readonly DeleteById5Path = '/careers/{career-id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteById5()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteById5$Response(params: DeleteById5$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return deleteById5(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteById5$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteById5(params: DeleteById5$Params, context?: HttpContext): Observable<void> {
-    return this.deleteById5$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
-    );
-  }
-
-  /** Path part for operation `searchByFilters5()` */
-  static readonly SearchByFilters5Path = '/careers/search';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `searchByFilters5()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  searchByFilters5$Response(params?: SearchByFilters5$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseCareerResponse>> {
-    return searchByFilters5(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `searchByFilters5$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  searchByFilters5(params?: SearchByFilters5$Params, context?: HttpContext): Observable<PageResponseCareerResponse> {
-    return this.searchByFilters5$Response(params, context).pipe(
-      map((r: StrictHttpResponse<PageResponseCareerResponse>): PageResponseCareerResponse => r.body)
-    );
-  }
-
-  /** Path part for operation `findAllByOwner5()` */
-  static readonly FindAllByOwner5Path = '/careers/owner';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAllByOwner5()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findAllByOwner5$Response(params?: FindAllByOwner5$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseCareerResponse>> {
-    return findAllByOwner5(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAllByOwner5$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findAllByOwner5(params?: FindAllByOwner5$Params, context?: HttpContext): Observable<PageResponseCareerResponse> {
-    return this.findAllByOwner5$Response(params, context).pipe(
-      map((r: StrictHttpResponse<PageResponseCareerResponse>): PageResponseCareerResponse => r.body)
-    );
-  }
-
-  /** Path part for operation `findById7()` */
-  static readonly FindById7Path = '/administrative/{id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById7()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findById7$Response(params: FindById7$Params, context?: HttpContext): Observable<StrictHttpResponse<AdministrativeResponse>> {
-    return findById7(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById7$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findById7(params: FindById7$Params, context?: HttpContext): Observable<AdministrativeResponse> {
-    return this.findById7$Response(params, context).pipe(
-      map((r: StrictHttpResponse<AdministrativeResponse>): AdministrativeResponse => r.body)
-    );
-  }
-
-  /** Path part for operation `deleteById6()` */
-  static readonly DeleteById6Path = '/administrative/{id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteById6()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteById6$Response(params: DeleteById6$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return deleteById6(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteById6$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteById6(params: DeleteById6$Params, context?: HttpContext): Observable<void> {
-    return this.deleteById6$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
-    );
-  }
-
-  /** Path part for operation `searchByFilters6()` */
-  static readonly SearchByFilters6Path = '/administrative/search';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `searchByFilters6()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  searchByFilters6$Response(params?: SearchByFilters6$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseAdministrativeResponse>> {
-    return searchByFilters6(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `searchByFilters6$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  searchByFilters6(params?: SearchByFilters6$Params, context?: HttpContext): Observable<PageResponseAdministrativeResponse> {
-    return this.searchByFilters6$Response(params, context).pipe(
-      map((r: StrictHttpResponse<PageResponseAdministrativeResponse>): PageResponseAdministrativeResponse => r.body)
-    );
-  }
-
-  /** Path part for operation `findAllByOwner6()` */
-  static readonly FindAllByOwner6Path = '/administrative/owner';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAllByOwner6()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findAllByOwner6$Response(params?: FindAllByOwner6$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseAdministrativeResponse>> {
-    return findAllByOwner6(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAllByOwner6$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findAllByOwner6(params?: FindAllByOwner6$Params, context?: HttpContext): Observable<PageResponseAdministrativeResponse> {
-    return this.findAllByOwner6$Response(params, context).pipe(
-      map((r: StrictHttpResponse<PageResponseAdministrativeResponse>): PageResponseAdministrativeResponse => r.body)
     );
   }
 

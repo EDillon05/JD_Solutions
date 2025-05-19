@@ -24,7 +24,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    private tokenSeervice: TokenService
+    private tokenService: TokenService
   ) {
   }
 
@@ -34,12 +34,12 @@ login() {
     body: this.authRequest
   }).subscribe({
     next: (res) => {
-      this.tokenSeervice.token = res.token as string;
+      this.tokenService.token = res.token as string;
       this.router.navigate(['documents']);
     },
     error: (err) => {
       console.log('Error recibido del backend:', err);
-      if (err.error.validationErrors) {
+      if (err.error.validateErrors) {
         this.errorMsg = err.error.validationErrors;
       } else {
         this.errorMsg.push(err.error.error);

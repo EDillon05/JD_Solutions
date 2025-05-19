@@ -8,14 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { CareerRequest } from '../../models/career-request';
+import { TeachingRequest } from '../../models/teaching-request';
 
-export interface SaveCareer$Params {
-      body: CareerRequest
+export interface Save$Params {
+      body: TeachingRequest
 }
 
-export function saveCareer(http: HttpClient, rootUrl: string, params: SaveCareer$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-  const rb = new RequestBuilder(rootUrl, saveCareer.PATH, 'post');
+export function save(http: HttpClient, rootUrl: string, params: Save$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+  const rb = new RequestBuilder(rootUrl, save.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
   }
@@ -30,4 +30,4 @@ export function saveCareer(http: HttpClient, rootUrl: string, params: SaveCareer
   );
 }
 
-saveCareer.PATH = '/careers';
+save.PATH = '/teaching';

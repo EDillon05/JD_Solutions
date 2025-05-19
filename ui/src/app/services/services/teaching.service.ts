@@ -11,29 +11,35 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { deleteById } from '../fn/teaching-controller/delete-by-id';
-import { DeleteById$Params } from '../fn/teaching-controller/delete-by-id';
-import { findAllByOwner } from '../fn/teaching-controller/find-all-by-owner';
-import { FindAllByOwner$Params } from '../fn/teaching-controller/find-all-by-owner';
-import { findById } from '../fn/teaching-controller/find-by-id';
-import { FindById$Params } from '../fn/teaching-controller/find-by-id';
+import { deleteById } from '../fn/teaching/delete-by-id';
+import { DeleteById$Params } from '../fn/teaching/delete-by-id';
+import { findAllByOwner } from '../fn/teaching/find-all-by-owner';
+import { FindAllByOwner$Params } from '../fn/teaching/find-all-by-owner';
+import { findById } from '../fn/teaching/find-by-id';
+import { FindById$Params } from '../fn/teaching/find-by-id';
 import { PageResponseTeachingResponse } from '../models/page-response-teaching-response';
-import { save } from '../fn/teaching-controller/save';
-import { Save$Params } from '../fn/teaching-controller/save';
-import { searchByFilters } from '../fn/teaching-controller/search-by-filters';
-import { SearchByFilters$Params } from '../fn/teaching-controller/search-by-filters';
+import { save } from '../fn/teaching/save';
+import { Save$Params } from '../fn/teaching/save';
+import { searchByFilters } from '../fn/teaching/search-by-filters';
+import { SearchByFilters$Params } from '../fn/teaching/search-by-filters';
 import { TeachingResponse } from '../models/teaching-response';
-import { update } from '../fn/teaching-controller/update';
-import { Update$Params } from '../fn/teaching-controller/update';
+import { update } from '../fn/teaching/update';
+import { Update$Params } from '../fn/teaching/update';
+import { uploadFile } from '../fn/teaching/upload-file';
+import { UploadFile$Params } from '../fn/teaching/upload-file';
 
+
+/**
+ * General Info API
+ */
 @Injectable({ providedIn: 'root' })
-export class TeachingControllerService extends BaseService {
+export class TeachingService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
   /** Path part for operation `update()` */
-  static readonly UpdatePath = '/teachings';
+  static readonly UpdatePath = '/teaching';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -41,7 +47,7 @@ export class TeachingControllerService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update$Response(params: Update$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+  update$Response(params: Update$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
     return update(this.http, this.rootUrl, params, context);
   }
 
@@ -51,14 +57,14 @@ export class TeachingControllerService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update(params: Update$Params, context?: HttpContext): Observable<number> {
+  update(params: Update$Params, context?: HttpContext): Observable<void> {
     return this.update$Response(params, context).pipe(
-      map((r: StrictHttpResponse<number>): number => r.body)
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
   /** Path part for operation `save()` */
-  static readonly SavePath = '/teachings';
+  static readonly SavePath = '/teaching';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -82,8 +88,33 @@ export class TeachingControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `uploadFile()` */
+  static readonly UploadFilePath = '/teaching/upload/{cv-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `uploadFile()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  uploadFile$Response(params: UploadFile$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+    return uploadFile(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `uploadFile$Response()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  uploadFile(params: UploadFile$Params, context?: HttpContext): Observable<string> {
+    return this.uploadFile$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
+    );
+  }
+
   /** Path part for operation `findById()` */
-  static readonly FindByIdPath = '/teachings/{teaching-id}';
+  static readonly FindByIdPath = '/teaching/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -108,7 +139,7 @@ export class TeachingControllerService extends BaseService {
   }
 
   /** Path part for operation `deleteById()` */
-  static readonly DeleteByIdPath = '/teachings/{teaching-id}';
+  static readonly DeleteByIdPath = '/teaching/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -133,7 +164,7 @@ export class TeachingControllerService extends BaseService {
   }
 
   /** Path part for operation `searchByFilters()` */
-  static readonly SearchByFiltersPath = '/teachings/search';
+  static readonly SearchByFiltersPath = '/teaching/search';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -158,7 +189,7 @@ export class TeachingControllerService extends BaseService {
   }
 
   /** Path part for operation `findAllByOwner()` */
-  static readonly FindAllByOwnerPath = '/teachings/owner';
+  static readonly FindAllByOwnerPath = '/teaching/owner';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

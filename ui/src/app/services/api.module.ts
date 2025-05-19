@@ -6,11 +6,14 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { TeachingControllerService } from './services/teaching-controller.service';
+import { TeachingService } from './services/teaching.service';
 import { ResearchService } from './services/research.service';
 import { RecognitionService } from './services/recognition.service';
+import { ProjectService } from './services/project.service';
 import { GeneralInfoService } from './services/general-info.service';
-import { ExperienceControllerService } from './services/experience-controller.service';
+import { ExperienceService } from './services/experience.service';
+import { CareerService } from './services/career.service';
+import { AdministrativeService } from './services/administrative.service';
 import { AuthenticationService } from './services/authentication.service';
 
 /**
@@ -21,11 +24,14 @@ import { AuthenticationService } from './services/authentication.service';
   exports: [],
   declarations: [],
   providers: [
-    TeachingControllerService,
+    TeachingService,
     ResearchService,
     RecognitionService,
+    ProjectService,
     GeneralInfoService,
-    ExperienceControllerService,
+    ExperienceService,
+    CareerService,
+    AdministrativeService,
     AuthenticationService,
     ApiConfiguration
   ],

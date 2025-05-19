@@ -8,16 +8,15 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { CareerRequest } from '../../models/career-request';
 
-export interface Update5$Params {
-      body: CareerRequest
+export interface DeleteById$Params {
+  id: number;
 }
 
-export function update5(http: HttpClient, rootUrl: string, params: Update5$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, update5.PATH, 'put');
+export function deleteById(http: HttpClient, rootUrl: string, params: DeleteById$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, deleteById.PATH, 'delete');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -30,4 +29,4 @@ export function update5(http: HttpClient, rootUrl: string, params: Update5$Param
   );
 }
 
-update5.PATH = '/careers';
+deleteById.PATH = '/teaching/{id}';

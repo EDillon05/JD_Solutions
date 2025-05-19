@@ -11,54 +11,60 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { deleteById4 } from '../fn/experience-controller/delete-by-id-4';
-import { DeleteById4$Params } from '../fn/experience-controller/delete-by-id-4';
+import { deleteById4 } from '../fn/experience/delete-by-id-4';
+import { DeleteById4$Params } from '../fn/experience/delete-by-id-4';
 import { ExperienceResponse } from '../models/experience-response';
-import { findAllByOwner4 } from '../fn/experience-controller/find-all-by-owner-4';
-import { FindAllByOwner4$Params } from '../fn/experience-controller/find-all-by-owner-4';
-import { findById4 } from '../fn/experience-controller/find-by-id-4';
-import { FindById4$Params } from '../fn/experience-controller/find-by-id-4';
+import { findAllByOwner4 } from '../fn/experience/find-all-by-owner-4';
+import { FindAllByOwner4$Params } from '../fn/experience/find-all-by-owner-4';
+import { findById4 } from '../fn/experience/find-by-id-4';
+import { FindById4$Params } from '../fn/experience/find-by-id-4';
 import { PageResponseExperienceResponse } from '../models/page-response-experience-response';
-import { save4 } from '../fn/experience-controller/save-4';
-import { Save4$Params } from '../fn/experience-controller/save-4';
-import { searchByFilters4 } from '../fn/experience-controller/search-by-filters-4';
-import { SearchByFilters4$Params } from '../fn/experience-controller/search-by-filters-4';
-import { update4 } from '../fn/experience-controller/update-4';
-import { Update4$Params } from '../fn/experience-controller/update-4';
+import { save4 } from '../fn/experience/save-4';
+import { Save4$Params } from '../fn/experience/save-4';
+import { searchByFilters4 } from '../fn/experience/search-by-filters-4';
+import { SearchByFilters4$Params } from '../fn/experience/search-by-filters-4';
+import { update5 } from '../fn/experience/update-5';
+import { Update5$Params } from '../fn/experience/update-5';
+import { uploadFile4 } from '../fn/experience/upload-file-4';
+import { UploadFile4$Params } from '../fn/experience/upload-file-4';
 
+
+/**
+ * General Info API
+ */
 @Injectable({ providedIn: 'root' })
-export class ExperienceControllerService extends BaseService {
+export class ExperienceService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /** Path part for operation `update4()` */
-  static readonly Update4Path = '/experiences';
+  /** Path part for operation `update5()` */
+  static readonly Update5Path = '/experience';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update4()` instead.
+   * To access only the response body, use `update5()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update4$Response(params: Update4$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-    return update4(this.http, this.rootUrl, params, context);
+  update5$Response(params: Update5$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return update5(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update4$Response()` instead.
+   * To access the full response (for headers, for example), `update5$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update4(params: Update4$Params, context?: HttpContext): Observable<number> {
-    return this.update4$Response(params, context).pipe(
-      map((r: StrictHttpResponse<number>): number => r.body)
+  update5(params: Update5$Params, context?: HttpContext): Observable<void> {
+    return this.update5$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
   /** Path part for operation `save4()` */
-  static readonly Save4Path = '/experiences';
+  static readonly Save4Path = '/experience';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -82,8 +88,33 @@ export class ExperienceControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `uploadFile4()` */
+  static readonly UploadFile4Path = '/experience/upload/{cv-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `uploadFile4()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  uploadFile4$Response(params: UploadFile4$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+    return uploadFile4(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `uploadFile4$Response()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  uploadFile4(params: UploadFile4$Params, context?: HttpContext): Observable<string> {
+    return this.uploadFile4$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
+    );
+  }
+
   /** Path part for operation `findById4()` */
-  static readonly FindById4Path = '/experiences/{experience-id}';
+  static readonly FindById4Path = '/experience/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -108,7 +139,7 @@ export class ExperienceControllerService extends BaseService {
   }
 
   /** Path part for operation `deleteById4()` */
-  static readonly DeleteById4Path = '/experiences/{experience-id}';
+  static readonly DeleteById4Path = '/experience/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -133,7 +164,7 @@ export class ExperienceControllerService extends BaseService {
   }
 
   /** Path part for operation `searchByFilters4()` */
-  static readonly SearchByFilters4Path = '/experiences/search';
+  static readonly SearchByFilters4Path = '/experience/search';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -158,7 +189,7 @@ export class ExperienceControllerService extends BaseService {
   }
 
   /** Path part for operation `findAllByOwner4()` */
-  static readonly FindAllByOwner4Path = '/experiences/owner';
+  static readonly FindAllByOwner4Path = '/experience/owner';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

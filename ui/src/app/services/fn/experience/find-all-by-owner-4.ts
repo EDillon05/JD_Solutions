@@ -8,16 +8,18 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { CareerResponse } from '../../models/career-response';
+import { PageResponseExperienceResponse } from '../../models/page-response-experience-response';
 
-export interface FindById5$Params {
-  'career-id': number;
+export interface FindAllByOwner4$Params {
+  page?: number;
+  size?: number;
 }
 
-export function findById5(http: HttpClient, rootUrl: string, params: FindById5$Params, context?: HttpContext): Observable<StrictHttpResponse<CareerResponse>> {
-  const rb = new RequestBuilder(rootUrl, findById5.PATH, 'get');
+export function findAllByOwner4(http: HttpClient, rootUrl: string, params?: FindAllByOwner4$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseExperienceResponse>> {
+  const rb = new RequestBuilder(rootUrl, findAllByOwner4.PATH, 'get');
   if (params) {
-    rb.path('career-id', params['career-id'], {});
+    rb.query('page', params.page, {});
+    rb.query('size', params.size, {});
   }
 
   return http.request(
@@ -25,9 +27,9 @@ export function findById5(http: HttpClient, rootUrl: string, params: FindById5$P
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<CareerResponse>;
+      return r as StrictHttpResponse<PageResponseExperienceResponse>;
     })
   );
 }
 
-findById5.PATH = '/careers/{career-id}';
+findAllByOwner4.PATH = '/experience/owner';

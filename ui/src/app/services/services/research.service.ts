@@ -25,6 +25,8 @@ import { searchByFilters1 } from '../fn/research/search-by-filters-1';
 import { SearchByFilters1$Params } from '../fn/research/search-by-filters-1';
 import { update1 } from '../fn/research/update-1';
 import { Update1$Params } from '../fn/research/update-1';
+import { uploadFile1 } from '../fn/research/upload-file-1';
+import { UploadFile1$Params } from '../fn/research/upload-file-1';
 
 
 /**
@@ -83,6 +85,31 @@ export class ResearchService extends BaseService {
   save1(params: Save1$Params, context?: HttpContext): Observable<number> {
     return this.save1$Response(params, context).pipe(
       map((r: StrictHttpResponse<number>): number => r.body)
+    );
+  }
+
+  /** Path part for operation `uploadFile1()` */
+  static readonly UploadFile1Path = '/researches/upload/{cv-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `uploadFile1()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  uploadFile1$Response(params: UploadFile1$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+    return uploadFile1(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `uploadFile1$Response()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  uploadFile1(params: UploadFile1$Params, context?: HttpContext): Observable<string> {
+    return this.uploadFile1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
     );
   }
 

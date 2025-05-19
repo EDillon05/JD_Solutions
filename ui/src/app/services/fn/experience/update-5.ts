@@ -8,14 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { AdministrativeRequest } from '../../models/administrative-request';
+import { ExperienceRequest } from '../../models/experience-request';
 
-export interface Update6$Params {
-      body: AdministrativeRequest
+export interface Update5$Params {
+      body: ExperienceRequest
 }
 
-export function update6(http: HttpClient, rootUrl: string, params: Update6$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, update6.PATH, 'put');
+export function update5(http: HttpClient, rootUrl: string, params: Update5$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, update5.PATH, 'put');
   if (params) {
     rb.body(params.body, 'application/json');
   }
@@ -30,4 +30,4 @@ export function update6(http: HttpClient, rootUrl: string, params: Update6$Param
   );
 }
 
-update6.PATH = '/administrative';
+update5.PATH = '/experience';

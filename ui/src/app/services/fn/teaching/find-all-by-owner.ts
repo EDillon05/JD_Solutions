@@ -8,17 +8,18 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Profile } from '../../models/profile';
-import { ProfileRequest } from '../../models/profile-request';
+import { PageResponseTeachingResponse } from '../../models/page-response-teaching-response';
 
-export interface SaveProfile$Params {
-      body: ProfileRequest
+export interface FindAllByOwner$Params {
+  page?: number;
+  size?: number;
 }
 
-export function saveProfile(http: HttpClient, rootUrl: string, params: SaveProfile$Params, context?: HttpContext): Observable<StrictHttpResponse<Profile>> {
-  const rb = new RequestBuilder(rootUrl, saveProfile.PATH, 'post');
+export function findAllByOwner(http: HttpClient, rootUrl: string, params?: FindAllByOwner$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseTeachingResponse>> {
+  const rb = new RequestBuilder(rootUrl, findAllByOwner.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.query('page', params.page, {});
+    rb.query('size', params.size, {});
   }
 
   return http.request(
@@ -26,9 +27,9 @@ export function saveProfile(http: HttpClient, rootUrl: string, params: SaveProfi
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Profile>;
+      return r as StrictHttpResponse<PageResponseTeachingResponse>;
     })
   );
 }
 
-saveProfile.PATH = '/profile/create';
+findAllByOwner.PATH = '/teaching/owner';
